@@ -1,0 +1,125 @@
+$theme-colors: (
+  "primary": #00509d,
+  "success": green,
+  "info": #fdc500,
+  "danger": red,
+);
+
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  background: #dcebfd;
+  font-family: 
+  'Ubuntu',
+  sans-serif;
+}
+
+.navbar {
+  margin: 10px;
+  background: transparent;
+  font-weight: 500;
+  font-size: larger;
+  height: 80px;
+}
+
+.nav-link {
+  color: #00509d;
+}
+
+.nav-link:hover {
+  color: #80a8ce;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.btn.btn-primary.signup {
+  border: 1px solid #00509d;
+  border-radius: 50px;
+  margin: 0 0 0 12px;
+  font-size: 20px;
+  color: white;
+  font-weight: 500;
+  padding: 8px 20px;
+}
+
+.static-card-col {
+  height: 100vh;
+  margin: 0px;
+  padding: 20px;
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 1px;
+}
+
+.static-card {
+  h4 {
+    color: #00509d;
+  };
+  padding: 30px;
+  background: #F0F5F9;
+  border: 1px solid #F0F5F9;
+  border-radius: 25px;
+  width: 100%;
+  box-shadow: #B8CFE4 0px 8px 28px;
+}
+
+.registration-img-card {
+  background-image: url('../images/boyy.png');
+  opacity: 0.5;
+}
+
+.form-control {
+  border: 1px solid #80a8ce;
+  border-radius: 12.5px;
+  padding: 12px;
+}
+
+.phone {
+  padding: 10px;
+  input {
+    border: 1px solid transparent
+  }
+}
+
+.btn.outlined-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  color: #00509d;
+  font-size: large;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12.5px;
+}
+
+.outlined-btn:hover {
+  margin-top: 12px;
+  padding: 8px 16px;
+  color: #00509d;
+  font-size: large;
+  text-decoration: underline;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12.5px;
+}
+
+.btn-signup {
+  margin-top: 12px;
+  padding: 8px 16px;
+  color: white;
+  font-size: large;
+  background: #00509d;
+  border: 1px solid #00509d;
+  border-radius: 12.5px;
+}
+
+.btn-signup:hover {
+  margin-top: 12px;
+  padding: 8px 16px;
+  color: #00509d;
+  font-size: large;
+  background: transparent;
+  border: 1px solid #00509d;
+  border-radius: 12.5px;
+}
