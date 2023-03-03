@@ -123,3 +123,82 @@ body {
   border: 1px solid #00509d;
   border-radius: 12.5px;
 }
+.btn-go-back:hover {
+  border: 2px dotted #00509d;
+  border-radius: 12.5px;
+  color:#00509d;
+  opacity: 1;
+}
+
+.profile-page-container {
+  // width: 100vw;
+  // height: 100vh;
+  background: white;
+}
+
+.profile-access-denied-card {
+  background: #FCFDFE;
+  border: 1px solid #B8CFE4;
+  box-shadow: #DCEBFD 0px 6px 32px;
+}
+
+.edit-profile-btn {
+  font-weight: 500;
+  font-size: larger;
+  margin: 24px 0px 32px 0px;
+  padding: 16px auto;
+  color: #00509d;
+  background-color: transparent;
+  border: 2px dotted #00509d;
+  border-radius: 12.5px;
+}
+
+hr {
+  color: #00509d;
+}
+
+.btn.outlined-btn:active {
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: #80a8ce;
+}
+
+
+
+.profile-avatar-img {
+  margin-top: 0px;
+  border: 1px solid #80a8ce;
+  border-radius: 12.5px;
+  box-shadow: #DCEBFD 0px 6px 12px;
+}
+.p-link-btn {
+  color: #00509d;
+  background-color: transparent;
+}
+.p-link-btn.nav-link:active {
+  background-color: #00509d;
+}
+
+.p-link-btn.nav-link:focus {
+  background-color: #00509d;
+}
+.active {
+  background-color: transparent;
+}
+
+.student-class-abcd {
+  border: 1px solid #80a8ce;
+  border-radius: 12.5px;
+  
+  h1 {
+    height: 120px;
+    font-size: 84px;
+    font-weight: 300;
+    color:#00509d;
+  }
+  h6 {
+    font-size: 20px;
+    font-weight: 400;
+    color:#00509d;
+  }
+}

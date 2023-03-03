@@ -1,7 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom"
 import Header from "./components/header.jsx"
-import { Registration, Main} from '../src/pages/index.js'
+import ShortHeader from "./components/shortHeader.jsx";
+import { Registration, Main, Login, Profile} from '../src/pages/index.js'
 
 function App() {
   
@@ -10,10 +11,10 @@ function App() {
   
 
     <Routes>
-        <Route path="/login" element={<><>Login</></> } />
+        <Route path="/login" element={<><ShortHeader/><Login/></> } />
         <Route path="/" element={<><Header/><Main/></>  } />
-        <Route path="/registration" element={<><Registration/></> } />
-        <Route path="/profile" element={<><Header/>asdasd</> } />
+        <Route path="/registration" element={<><ShortHeader/><Registration/></> } />
+        <Route path="/profile" element={<><Header/><Profile/></> } />
       </Routes>
 
   </>)

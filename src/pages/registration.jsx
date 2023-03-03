@@ -23,7 +23,7 @@ const Registration = () => {
 
   const isAuth = useSelector(selectIsAuth);
 
-  const [phone, setPhone] = React.useState();
+  const [phone, setPhone] = React.useState("+7");
 
   const [errorMessage, setErrorMessage] = React.useState("");
 

@@ -26,10 +26,9 @@ const Main = () => {
             end: new Date(2023, 2, 12, 17, 30),
             color: 'blue'
           },
-        // More events...
       ];
 
-      const localizer = momentLocalizer(moment)
+    const localizer = momentLocalizer(moment)
 
     return  <>
     <Calendar
