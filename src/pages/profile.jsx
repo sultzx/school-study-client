@@ -17,8 +17,8 @@ import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
-
-import ProfileDetail from '../components/profileDetail.jsx'
+import ProfileDetail from "../components/profileDetail.jsx";
+import Rating from "../components/rating.jsx";
 import girl_adenied from "../images/girl_adenied.png";
 import { fetchUpdateMe, selectIsAuth } from "../redux/slices/auth.js";
 
@@ -28,12 +28,23 @@ const Profile = () => {
   const isStatus = true;
 
   const userData = {
-    lastname: 'Жумагалиев', firstname: 'Султангали', patronymic: 'Қайсарұлы', 
-    phone: '87765111441', address: 'Ержанова, 43', birthday: '27-02-1998', 
-    father_lname: 'Утембетов', father_fname: 'Қайсар', father_patron: 'Жумагалиевич', father_phone: '87011651898', 
-    mother_lname: 'Тулепова', mother_fname: 'Кулнар', mother_patron: 'Абекеновна', mother_phone: '87011651949',
-    classroom: '10', abcd: 'А'
-  }
+    lastname: "Жумагалиев",
+    firstname: "Султангали",
+    patronymic: "Қайсарұлы",
+    phone: "87765111441",
+    address: "Ержанова, 43",
+    birthday: "27-02-1998",
+    father_lname: "Утембетов",
+    father_fname: "Қайсар",
+    father_patron: "Жумагалиевич",
+    father_phone: "87011651898",
+    mother_lname: "Тулепова",
+    mother_fname: "Кулнар",
+    mother_patron: "Абекеновна",
+    mother_phone: "87011651949",
+    classroom: "10",
+    abcd: "А",
+  };
 
   if (isAuth) {
     return <Navigate to="/login" />;
@@ -83,9 +94,8 @@ const Profile = () => {
       <Container>
         <Tab.Container defaultActiveKey={"profile"}>
           <h3>Жеке профиль</h3>
-          <br />
           <Row>
-            <Col lg={4} xs={12}>
+            <Col lg={4} xs={12} style={{ marginTop: "20px" }}>
               <Card
                 className="static-card profile-access-denied-card"
                 style={{
@@ -107,94 +117,144 @@ const Profile = () => {
                     </Button>
                     <div className="text-center">
                       <Nav variant="pills" className="flex-column">
-                        <hr style={{margin: '0px'}} />
+                        <hr style={{ margin: "0px" }} />
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
                             eventKey="profile"
-                            style={{ padding: "6px", margin: "0", color: '#00509D', background: 'transparent' }}
+                            style={{
+                              padding: "6px",
+                              margin: "0",
+                              color: "#00509D",
+                              background: "transparent",
+                            }}
                           >
                             Оқушы профилі
                           </Nav.Link>
                         </Nav.Item>
-                        <hr style={{margin: '0px'}} />
+                        <hr style={{ margin: "0px" }} />
+                        <Nav.Item>
+                          <Nav.Link
+                            className="btn btn-primary outlined-btn p-link-btn"
+                            eventKey="rating"
+                            style={{
+                              padding: "6px",
+                              margin: "0",
+                              color: "#00509D",
+                              background: "transparent",
+                            }}
+                          >
+                            Рейтинг
+                          </Nav.Link>
+                        </Nav.Item>
+                        <hr style={{ margin: "0px" }} />
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
                             eventKey="calendar"
-                            style={{ padding: "6px", margin: "0", color: '#00509D', background: 'transparent' }}
+                            style={{
+                              padding: "6px",
+                              margin: "0",
+                              color: "#00509D",
+                              background: "transparent",
+                            }}
                           >
                             Күнтізбе
                           </Nav.Link>
                         </Nav.Item>
 
-                        <hr style={{margin: '0px'}} />
+                        <hr style={{ margin: "0px" }} />
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
-                            style={{ padding: "6px", margin: "0", color: '#00509D', background: 'transparent' }}    
+                            style={{
+                              padding: "6px",
+                              margin: "0",
+                              color: "#00509D",
+                              background: "transparent",
+                            }}
                           >
                             Барлық сабақтар
                           </Nav.Link>
                         </Nav.Item>
 
-                        <hr style={{margin: '0px'}} />
+                        <hr style={{ margin: "0px" }} />
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
-                            style={{ padding: "6px", margin: "0", color: '#00509D', background: 'transparent' }}
+                            style={{
+                              padding: "6px",
+                              margin: "0",
+                              color: "#00509D",
+                              background: "transparent",
+                            }}
                           >
                             Тесттер
                           </Nav.Link>
                         </Nav.Item>
 
-                        <hr style={{margin: '0px'}} />
+                        <hr style={{ margin: "0px" }} />
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
-                            style={{ padding: "6px", margin: "0", color: '#00509D', background: 'transparent' }}
+                            style={{
+                              padding: "6px",
+                              margin: "0",
+                              color: "#00509D",
+                              background: "transparent",
+                            }}
                           >
                             Емтихан
                           </Nav.Link>
                         </Nav.Item>
 
-                        <hr style={{margin: '0px'}} />
+                        <hr style={{ margin: "0px" }} />
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
-                            style={{ padding: "6px", margin: "0", color: '#00509D', background: 'transparent' }}
+                            style={{
+                              padding: "6px",
+                              margin: "0",
+                              color: "#00509D",
+                              background: "transparent",
+                            }}
                           >
                             Мұғалімге сұрақ
                           </Nav.Link>
                         </Nav.Item>
-                        <hr style={{margin: '0px'}} />
+                        <hr style={{ margin: "0px" }} />
                       </Nav>
                     </div>
                   </Row>
                 </Card.Body>
               </Card>
             </Col>
-            <Col>
+            <Col style={{ marginTop: "20px" }}>
               <Tab.Content>
                 <Tab.Pane eventKey="profile">
-                    <ProfileDetail
-                    lastname={userData && userData.lastname} 
-                    firstname={userData && userData.firstname} 
-                    patronymic={userData && userData.patronymic} 
+                  <ProfileDetail
+                    lastname={userData && userData.lastname}
+                    firstname={userData && userData.firstname}
+                    patronymic={userData && userData.patronymic}
                     phone={userData && userData.phone}
-                    address={userData && userData.address} 
-                    birthday={userData && userData.birthday} 
-                    father_lname={userData && userData.father_lname} 
-                    father_fname={userData && userData.father_fname} 
-                    father_patron={userData && userData.father_patron} 
-                    father_phone={userData && userData.father_phone} 
-                    mother_lname={userData && userData.mother_lname} 
-                    mother_fname={userData && userData.mother_fname} 
-                    mother_patron={userData && userData.mother_patron} 
+                    address={userData && userData.address}
+                    birthday={userData && userData.birthday}
+                    father_lname={userData && userData.father_lname}
+                    father_fname={userData && userData.father_fname}
+                    father_patron={userData && userData.father_patron}
+                    father_phone={userData && userData.father_phone}
+                    mother_lname={userData && userData.mother_lname}
+                    mother_fname={userData && userData.mother_fname}
+                    mother_patron={userData && userData.mother_patron}
                     mother_phone={userData && userData.mother_phone}
-                    classroom={userData && userData.classroom} 
+                    classroom={userData && userData.classroom}
                     abcd={userData && userData.abcd}
-                    />
+                  />
+                  <br />
+                </Tab.Pane>
+                <Tab.Pane eventKey="rating">
+                  <Rating />
+                  <br />
                 </Tab.Pane>
                 <Tab.Pane eventKey="calendar">Calendar panel</Tab.Pane>
               </Tab.Content>

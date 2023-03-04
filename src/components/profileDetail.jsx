@@ -1,22 +1,12 @@
 
 import React from "react";
 import {
-  Tab,
-  Nav,
-  Container,
   Row,
   Col,
-  Button,
-  Card,
-  Form,
-  Alert,
-  Tabs,
+  Card
 } from "react-bootstrap";
-import { Link, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
-import { PersonFill, TelephoneFill, PinMapFill, Calendar2Fill, PhoneFill } from "react-bootstrap-icons";
+import { Person, Telephone, PinMap, Calendar2X } from "react-bootstrap-icons";
 
 
 const profileDetail = ({
@@ -24,7 +14,6 @@ const profileDetail = ({
                 father_lname, father_fname, father_patron, father_phone, 
                 mother_lname, mother_fname, mother_patron, mother_phone,
                 classroom, abcd}) => {
-
     return (<>
         <Card className="static-card profile-access-denied-card">
             <Card.Body>
@@ -33,16 +22,18 @@ const profileDetail = ({
                     <Col lg={8} xs={12}>
                     <h4>Жеке ақпарат</h4>
                     <hr />
-                    <h5 style={{margin: '16px 0'}}><PersonFill size={'24px'} color="#00509d"/>  {lastname} {firstname} {patronymic}</h5>
-                    <h5 style={{margin: '16px 0'}}><TelephoneFill size={'24px'} color="#00509d"/>  {phone}</h5>
-                    <h5 style={{margin: '16px 0'}}><PinMapFill size={'24px'} color="#00509d"/>  {address}</h5>
-                    <h5 style={{margin: '16px 0'}}><Calendar2Fill size={'24px'} color="#00509d"/>  {birthday}</h5>
+                    <h5 style={{margin: '16px 0'}}><Person size={'22px'} color="#00509d"/> &nbsp; {lastname} {firstname} {patronymic}</h5>
+                    <h5 style={{margin: '16px 0'}}><Telephone size={'22px'} color="#00509d"/> &nbsp; {phone}</h5>
+                    <h5 style={{margin: '16px 0'}}><PinMap size={'22px'} color="#00509d"/> &nbsp; {address}</h5>
+                    <h5 style={{margin: '16px 0'}}><Calendar2X size={'22px'} color="#00509d"/> &nbsp; {birthday}</h5>
                     <hr />
-                    {father_lname}, {father_fname}, {father_patron}, {father_phone}, 
-                    {mother_lname}, {mother_fname}, {mother_patron}, {mother_phone},
+                    <h6 style={{margin: '16px 0'}}><Person size={'22px'} color="#00509d"/> &nbsp;  {father_lname} {father_fname} {father_patron}</h6>
+                    <h6 style={{margin: '16px 0'}}><Telephone size={'22px'} color="#00509d"/> &nbsp; {father_phone}</h6>
+                    <hr />
+                    <h6 style={{margin: '16px 0'}}><Person size={'22px'} color="#00509d"/> &nbsp;  {mother_lname} {mother_fname} {mother_patron}</h6>
+                    <h6 style={{margin: '16px 0'}}><Telephone size={'22px'} color="#00509d"/> &nbsp; {mother_phone}</h6>
                     </Col>
-                    <Col className="col-lg-4 col-xs-12"
-                    >
+                    <Col className="col-lg-4 col-xs-12">
                         <Card className="student-class-abcd">
                             <Card.Body className="text-center">
                                 <h1>{classroom} {abcd}</h1>
@@ -50,8 +41,6 @@ const profileDetail = ({
                             </Card.Body>
                         </Card>
                     </Col>
-                
-                
                 </Row>
             </Card.Body>
         </Card>
