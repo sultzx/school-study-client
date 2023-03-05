@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import "react-phone-number-input/style.css";
 import { Person, Telephone, PinMap, Calendar2X } from "react-bootstrap-icons";
 import { Chart } from "react-google-charts";
 
-const rating = () => {
+const Rating = () => {
+
+  const [chartWidth, setChartWidth] = React.useState('100%')
+
   const dataA = [
     ["Pac Man", "Percentage"],
     ["Қазақ тілі", 35],
@@ -74,8 +77,8 @@ const rating = () => {
               chartType="PieChart"
               data={dataA}
               options={options}
-              width={"auto"}
-              height={"300px"}
+              width={"100%"}
+              height={"400px"}
             />
             <hr />
           </Col>
@@ -85,8 +88,8 @@ const rating = () => {
               chartType="ColumnChart"
               data={dataB}
               options={optionsB}
-              width={"auto"}
-              height={"300px"}
+              width={"100%"}
+              height={"400px"}
             />
             <hr />
           </Col>
@@ -102,19 +105,20 @@ const rating = () => {
               data={dataD}
               options={optionsD}
               width={"100%"}
-              height={"200px"}
+              height={"100px"}
             />
             <hr />
           </Col>
-          <Col lg={12} xs={12} className=" sticky-top">
+          <Col lg={12} xs={12} >
           <h6>Жылдық балл көрсеткіші</h6>
             <Chart
-              style={{ padding: "0", margin: "12px -22px", color: "green" }}
+            className=""
+              style={{ padding: "0", color: "green"}}
               chartType="LineChart"
               data={dataC}
               options={optionsC}
-              width={"auto"}
-              height={"500px"}
+              width={"100%"}
+              height={"400px"}
             />
           </Col>
         </Row>
@@ -123,4 +127,4 @@ const rating = () => {
   );
 };
 
-export default rating;
+export default Rating;

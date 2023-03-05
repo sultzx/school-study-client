@@ -19,6 +19,7 @@ import PhoneInput from "react-phone-number-input";
 
 import ProfileDetail from "../components/profileDetail.jsx";
 import Rating from "../components/rating.jsx";
+import Calendar from "../components/calendar.jsx"
 import girl_adenied from "../images/girl_adenied.png";
 import { fetchUpdateMe, selectIsAuth } from "../redux/slices/auth.js";
 
@@ -26,6 +27,60 @@ const Profile = () => {
   const isAuth = useSelector(selectIsAuth);
 
   const isStatus = true;
+
+  const dataA = [
+    ["Pac Man", "Percentage"],
+    ["Қазақ тілі", 35],
+    ["Математика", 25],
+    ["Қазақстан тарихы", 15],
+    ["Ағылшын тілі", 10],
+  ];
+
+  const dataB = [
+    ["Element", "Density", { role: "style" }],
+    ["Copper", 8.94, "#407CB6"], // RGB value
+    ["Silver", 10.49, "#407CB6"], // English color name
+    ["Gold", 19.3, "#407CB6"],
+    ["Platinum", 21.45, "#407CB6"], // CSS-style declaration
+  ];
+
+  const dataC = [
+    [
+      "Жалпы көрсеткіш",
+      "Қазақ тілі",
+      "Математика",
+      "Қазақстан тарихы",
+      "Ағылшын тілі",
+    ],
+    ["I тоқсан", 92, 86, 97, 96],
+    ["II тоқсан", 85, 75, 84, 80],
+    ["III тоқсан", 75, 87, 85, 76],
+    ["IV тоқсан", 92, 92, 98, 67],
+  ];
+
+  const dataD = [
+    ["", "Қазақ тілі", "Математика", "Қазақстан тарихы", "Ағылшын тілі"],
+    ["Ақпан", 92, 86, 97, 96],
+  ];
+
+  const options = {
+    legend: "none",
+
+    pieStartAngle: 0,
+    slices: {},
+  };
+  const optionsB = {
+    legend: "none",
+  };
+  const optionsC = {
+    legend: { position: "bottom" },
+  };
+
+  const optionsD = {
+    legend: { position: "bottom" },
+
+    bars: "horizontal",
+  };
 
   const userData = {
     lastname: "Жумагалиев",
@@ -92,7 +147,7 @@ const Profile = () => {
     <Container fluid className="profile-page-container">
       <br />
       <Container>
-        <Tab.Container defaultActiveKey={"profile"}>
+        <Tab.Container defaultActiveKey={"rating"}>
           <h3>Жеке профиль</h3>
           <Row>
             <Col lg={4} xs={12} style={{ marginTop: "20px" }}>
@@ -129,7 +184,7 @@ const Profile = () => {
                               background: "transparent",
                             }}
                           >
-                            Оқушы профилі
+                            Жеке ақпарат
                           </Nav.Link>
                         </Nav.Item>
                         <hr style={{ margin: "0px" }} />
@@ -256,7 +311,9 @@ const Profile = () => {
                   <Rating />
                   <br />
                 </Tab.Pane>
-                <Tab.Pane eventKey="calendar">Calendar panel</Tab.Pane>
+                <Tab.Pane eventKey="calendar">
+                  <Calendar/>
+                <br /></Tab.Pane>
               </Tab.Content>
             </Col>
           </Row>
