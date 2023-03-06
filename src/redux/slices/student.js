@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../axios.js'
 
-export const fetchAuth= createAsyncThunk('auth/fetchAuth', async (params, {rejectWithValue}) => {
+export const fetchLogin= createAsyncThunk('auth/fetchLogin', async (params, {rejectWithValue}) => {
     try {
-        const  response  = await axios.post('/api/auth/login', params)
+        const  response  = await axios.post('/api/user/student/auth/login', params)
           return response.data  
       } catch (error) {
           if (!error.response) {
@@ -15,7 +15,7 @@ export const fetchAuth= createAsyncThunk('auth/fetchAuth', async (params, {rejec
 
 export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params, {rejectWithValue}) => {
     try {
-      const  response  = await axios.post('/api/auth/registration', params)
+      const  response  = await axios.post('/api/user/student/auth/registration', params)
         return response.data  
     } catch (error) {
         if (!error.response) {
@@ -26,13 +26,13 @@ export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (param
 })
 
 export const fetchAuthMe= createAsyncThunk('auth/fetchAuthMe', async () => {
-    const { data } = await axios.get('/api/auth/me')
+    const { data } = await axios.get('/api/user/student/me')    
     return data
 })
 
 export const fetchUpdateMe= createAsyncThunk('auth/fetchUpdateMe', async (params, {rejectWithValue}) => {
     try {
-        const  response  = await axios.patch('/api/auth/update', params)
+        const  response  = await axios.patch('api/user/student/me/update', params)
           return response.data  
       } catch (error) {
           if (!error.response) {
@@ -48,8 +48,8 @@ const initialState = {
     error: ''
 }
 
-const authSlice = createSlice({
-    name: 'auth',
+const studentSlice = createSlice({
+    name: 'student',
     initialState,
     reducers: {
         logout: (state) => {
@@ -58,15 +58,15 @@ const authSlice = createSlice({
         }
     },
     extraReducers: {
-        [fetchAuth.pending]: (state) => {
+        [fetchLogin.pending]: (state) => {
             state.status = 'loading'
             state.error = ''
         },
-        [fetchAuth.fulfilled]: (state, action) => {
+        [fetchLogin.fulfilled]: (state, action) => {
             state.status = 'loaded'
             state.data = action.payload
         },
-        [fetchAuth.rejected]: (state, action) => {
+        [fetchLogin.rejected]: (state, action) => {
             state.status = 'error'
             state.error = action.payload
         },
@@ -114,8 +114,8 @@ const authSlice = createSlice({
     }
 })
 
-export const selectIsAuth = (state) => Boolean(state.auth.data)
+export const selectIsAuth = (state) => Boolean(state.student.data)
 
-export const authReducer = authSlice.reducer
+export const studentReducer = studentSlice.reducer
 
-export const { logout } = authSlice.actions
+export const { logout } = studentSlice.actions

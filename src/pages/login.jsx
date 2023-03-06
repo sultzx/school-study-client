@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 
-import { fetchAuth, selectIsAuth } from "../redux/slices/auth.js";
+import { fetchLogin, selectIsAuth } from "../redux/slices/student.js";
 
 const Login = () => {
 
@@ -45,7 +45,7 @@ const Login = () => {
   const onSubmit = async (values) => {
    
       const data = await dispatch(
-        fetchAuth({
+        fetchLogin({
           login: values.login,
           password: values.password,
         })
@@ -161,7 +161,7 @@ const Login = () => {
                 </Row>
 
                 <Col className="col-12 d-flex column justify-content-end align-items-center">
-                  <Link to="/registration">
+                  <Link to="/for-student/registration">
                     <Button variant="primary" className="btn outlined-btn">
                       Тіркелу парақшасы
                     </Button>
@@ -173,7 +173,7 @@ const Login = () => {
                     className="btn-signup"
                     type="submit"
                   >
-                    Тіркелу
+                    Жүйеге кіру
                   </Button>
                 </Col>
               </Form>

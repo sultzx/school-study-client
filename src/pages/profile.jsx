@@ -21,12 +21,14 @@ import ProfileDetail from "../components/profileDetail.jsx";
 import Rating from "../components/rating.jsx";
 import Calendar from "../components/calendar.jsx"
 import girl_adenied from "../images/girl_adenied.png";
-import { fetchUpdateMe, selectIsAuth } from "../redux/slices/auth.js";
+import { fetchUpdateMe, selectIsAuth } from "../redux/slices/student.js";
 
 const Profile = () => {
   const isAuth = useSelector(selectIsAuth);
 
-  const isStatus = true;
+  const studentData = useSelector((state) => state.student.data);
+
+  const isStatus = studentData && studentData.status == 'accepted';
 
   const dataA = [
     ["Pac Man", "Percentage"],
@@ -137,6 +139,7 @@ const Profile = () => {
                 </Card>
               </Col>
             </Row>
+            <br />
           </Container>
         </Container>
       </>

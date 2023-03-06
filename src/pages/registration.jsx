@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
-import { fetchRegister, selectIsAuth } from "../redux/slices/auth.js";
+import { fetchRegister, selectIsAuth } from "../redux/slices/student.js";
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -381,14 +381,13 @@ const Registration = () => {
                 </Row>
 
                 <Col className="col-12 d-flex column justify-content-end align-items-center">
-                  <Link to="/login">
+                  <Link to="/for-student/login">
                     <Button variant="primary" className="btn outlined-btn">
                       Кіру парақшасы
                     </Button>
                   </Link>
 
                   <Button
-                    // disabled={!isValid}
                     variant="primary"
                     className="btn-signup"
                     type="submit"
