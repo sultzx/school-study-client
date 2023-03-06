@@ -37,7 +37,7 @@ const profileDetail = ({
                         <Card className="student-class-abcd">
                             <Card.Body className="text-center">
                                 <h1>{classroom} {abcd}</h1>
-                                <h6>сынып оқушысы</h6>
+                                {classroom && abcd &&  <h6>сынып оқушысы</h6>}
                             </Card.Body>
                         </Card>
                     </Col>

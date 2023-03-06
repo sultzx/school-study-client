@@ -70,6 +70,11 @@ body {
   opacity: 0.5;
 }
 
+.registration-teacher-img-card {
+  background-image: url('../images/teacher.png');
+  opacity: 0.5;
+}
+
 .form-control {
   border: 1px solid #80a8ce;
   border-radius: 12.5px;
@@ -201,4 +206,76 @@ hr {
     font-weight: 400;
     color:#00509d;
   }
+}
+
+.select-input {
+  border: 1px solid #80a8ce;
+  border-radius: 12.5px;
+  padding: 12px;
+}
+
+.emp-nav-link, .stu-nav-link:active {
+  color:#00509d
+}
+
+.emp-nav-link, .stu-nav-link:focus {
+  color:#00509d
+}
+
+.subject-btn {
+  margin: 12px 0;
+  padding: 0px;
+  height: 260px;
+  border: 1px solid #80a8ce;
+  border-radius: 12.5px;
+  background-color: white;
+  color:#003d77;
+  font-size: larger;
+  font-weight: 600;
+  p {
+    margin: 0;
+    background-color: #155FA5;
+    border: 1px solid #DCEBFD;
+    color: white
+  }
+}
+
+.subject-btn:active {
+  background-color: #B8CFE4;
+}
+
+.subject-btn:hover {
+  background-color: #F0F5F9;
+  border: 3px solid #00509d;
+  color: #00509d;
+}
+
+.subject-btn:focus {
+  // background-color: #155FA5;
+  border: 6px solid #00509d;
+  color: white;
+}
+
+.subject-kaz-img {
+  background-image: url('../images/kaz.jpeg');
+  background-size: cover;
+  opacity: 0.7;
+}
+
+.subject-math-img {
+  background-image: url('../images/math.png');
+  background-size: cover;
+  opacity: 0.7;
+}
+
+.subject-history-img {
+  background-image: url('../images/history.jpg');
+  background-size: cover;
+  opacity: 0.7;
+}
+
+.subject-english-img {
+  background-image: url('../images/english.png');
+  background-size: cover;
+  opacity: 0.7;
 }

@@ -15,8 +15,8 @@ const ForEmployee = () => {
                                     Жүйеге кірмес бұрын, ең алдымен жүйеге тіркеліп алу қажет. Содан соң, жеке ақпаратыңыз модерациядан өтіп, жеке профилге рұқсат ала аласыз. Егерде Сіз бұрын тіркелген болсаңыз, онда жүйеге кіру батырмасын басыңыз.
                                 </Card.Title>
                                 <br />
-                                <Button className="btn btn-primary signup shadow" href='/for-student/login'>Жүйеге кіру</Button>
-                                <Button className="btn btn-primary signup shadow" href='/for-student/registration'>Жүйеге тіркелу</Button>
+                                <Button className="btn btn-primary signup shadow" href='/for-employee/login'>Жүйеге кіру</Button>
+                                <Button className="btn btn-primary signup shadow" href='/for-employee/registration'>Жүйеге тіркелу</Button>
                             </Card.Body>
                         </Card>
                     </Row>

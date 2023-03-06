@@ -15,9 +15,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 
-import { fetchLoginStudent, selectIsAuth } from "../redux/slices/user.js";
+import { fetchLoginEmployee, selectIsAuth } from "../redux/slices/user.js";
 
-const Login = () => {
+const LoginEmployee = () => {
 
   const dispatch = useDispatch();
 
@@ -26,6 +26,8 @@ const Login = () => {
   const [phone, setPhone] = React.useState();
 
   const [errorMessage, setErrorMessage] = React.useState("");
+
+  const [matchedPass, setMatchedPass] = React.useState(true);
 
   const {
     register,
@@ -43,7 +45,7 @@ const Login = () => {
   const onSubmit = async (values) => {
    
       const data = await dispatch(
-        fetchLoginStudent({
+        fetchLoginEmployee({
           login: values.login,
           password: values.password,
         })
@@ -64,7 +66,7 @@ const Login = () => {
     <Container fluid>
       <Row>
         <Col
-          className="col-lg-4 col-xs-12 d-flex align-items-center justify-content-center registration-img-card"
+          className="col-lg-4 col-xs-12 d-flex align-items-center justify-content-center registration-teacher-img-card"
           style={{ padding: "0" }}
         ></Col>
         <Col className="col-lg-8 col-xs-12 d-flex row static-card-col align-items-center justify-content-start">
@@ -159,7 +161,7 @@ const Login = () => {
                 </Row>
 
                 <Col className="col-12 d-flex column justify-content-end align-items-center">
-                  <Link to="/for-student/registration">
+                  <Link to="/for-employee/registration">
                     <Button variant="primary" className="btn outlined-btn">
                       Тіркелу парақшасы
                     </Button>
@@ -183,4 +185,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginEmployee;

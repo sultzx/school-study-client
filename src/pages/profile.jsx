@@ -16,19 +16,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { fetchAuthMe } from "../redux/slices/user.js";
 
-import ProfileDetail from "../components/profileDetail.jsx";
-import Rating from "../components/rating.jsx";
-import Calendar from "../components/calendar.jsx"
+import ProfileDetail from "../components/Student/profileDetail.jsx";
+import Rating from "../components/Student/rating.jsx";
+import Calendar from "../components/Student/calendar.jsx"
 import girl_adenied from "../images/girl_adenied.png";
-import { fetchUpdateMe, selectIsAuth } from "../redux/slices/student.js";
 
 const Profile = () => {
-  const isAuth = useSelector(selectIsAuth);
+  const dispatch = useDispatch()
+  React.useEffect(() => {
+    dispatch(fetchAuthMe())
+  }, [])
+  const userData = useSelector((state) => state.user.data);
 
-  const studentData = useSelector((state) => state.student.data);
-
-  const isStatus = studentData && studentData.status == 'accepted';
+  const isStatus = userData && userData.status != 'accepted';
 
   const dataA = [
     ["Pac Man", "Percentage"],
@@ -84,28 +86,24 @@ const Profile = () => {
     bars: "horizontal",
   };
 
-  const userData = {
-    lastname: "Жумагалиев",
-    firstname: "Султангали",
-    patronymic: "Қайсарұлы",
-    phone: "87765111441",
-    address: "Ержанова, 43",
-    birthday: "27-02-1998",
-    father_lname: "Утембетов",
-    father_fname: "Қайсар",
-    father_patron: "Жумагалиевич",
-    father_phone: "87011651898",
-    mother_lname: "Тулепова",
-    mother_fname: "Кулнар",
-    mother_patron: "Абекеновна",
-    mother_phone: "87011651949",
-    classroom: "10",
-    abcd: "А",
-  };
-
-  if (isAuth) {
-    return <Navigate to="/login" />;
-  }
+  // const userData = {
+  //   lastname: "Жумагалиев",
+  //   firstname: "Султангали",
+  //   patronymic: "Қайсарұлы",
+  //   phone: "87765111441",
+  //   address: "Ержанова, 43",
+  //   birthday: "27-02-1998",
+  //   father_lname: "Утембетов",
+  //   father_fname: "Қайсар",
+  //   father_patron: "Жумагалиевич",
+  //   father_phone: "87011651898",
+  //   mother_lname: "Тулепова",
+  //   mother_fname: "Кулнар",
+  //   mother_patron: "Абекеновна",
+  //   mother_phone: "87011651949",
+  //   classroom: "",
+  //   abcd: "",
+  // };
 
   if (!isStatus) {
     return (
@@ -168,9 +166,10 @@ const Profile = () => {
                       alt=""
                     />
                     <h4 className="text-center" style={{ marginTop: "24px" }}>
-                      Жұмағалиев Сұлтанғали Қайсарұлы
+                      {userData && userData.lastname}&nbsp;{userData && userData.firstname}
+                      &nbsp; {userData && userData.patronymic}  
                     </h4>
-                    <Button className="btn btn-primary edit-profile-btn">
+                    <Button className="btn btn-primary edit-profile-btn" href="/edit-student-profile">
                       Профильді өңдеу
                     </Button>
                     <div className="text-center">

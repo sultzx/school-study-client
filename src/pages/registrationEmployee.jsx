@@ -16,9 +16,9 @@ import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
-import { fetchRegisterStudent, selectIsAuth } from "../redux/slices/user.js";
+import { fetchRegisterEmployee, selectIsAuth } from "../redux/slices/user.js";
 
-const Registration = () => {
+const RegistrationEmployee = () => {
   const dispatch = useDispatch();
 
   const isAuth = useSelector(selectIsAuth);
@@ -28,6 +28,27 @@ const Registration = () => {
   const [errorMessage, setErrorMessage] = React.useState("");
 
   const [matchedPass, setMatchedPass] = React.useState(true);
+
+  const [job, setJob] = React.useState("");
+
+  const jobOptions = [
+    { value: "0", text: "Қызмет түрін таңдаңыз" },
+    { value: "1", text: "Мұғалім" },
+    { value: "2", text: "Модератор" },
+  ];
+
+  const handleJobChange = (event) => {
+    switch (jobOptions[event.target.value].text) {
+      case "Мұғалім":
+        setJob("teacher");
+        break;
+      case "Модератор":
+        setJob("moderator");
+        break;
+    }
+  };
+
+  console.log(job && job);
 
   const {
     register,
@@ -40,7 +61,6 @@ const Registration = () => {
       firstname: "",
       patronymic: "",
       email: "",
-      address: "",
       password: "",
       confirmPass: "",
     },
@@ -48,15 +68,16 @@ const Registration = () => {
   });
 
   const onSubmit = async (values) => {
+    console.log(values)
     if (values.password === values.confirmPass) {
       const data = await dispatch(
-        fetchRegisterStudent({
+        fetchRegisterEmployee({
           lastname: values.lastname,
           firstname: values.firstname,
           patronymic: values.patronymic,
           email: values.email,
           phoneNumber: phone && phone,
-          address: values.address,
+          role: job && job,
           password: values.password,
         })
       );
@@ -72,14 +93,14 @@ const Registration = () => {
   };
 
   if (isAuth) {
-    return <Navigate to="/" />;
+    window.location.assign('http://localhost:3000/employee-profile')
   }
 
   return (
     <Container fluid>
       <Row>
         <Col
-          className="col-lg-4 col-xs-12 d-flex align-items-center justify-content-center registration-img-card"
+          className="col-lg-4 col-xs-12 d-flex align-items-center justify-content-center registration-teacher-img-card"
           style={{ padding: "0" }}
         ></Col>
         <Col className="col-lg-8 col-xs-12 d-flex row static-card-col align-items-center justify-content-start">
@@ -280,33 +301,24 @@ const Registration = () => {
                   </Col>
                   <Col lg={4} xs={12}>
                     <Form.Group className="mb-3">
-                      {errors && errors.address ? (
+                      {errors && errors.role ? (
                         <Form.Label style={{ color: "red" }}>
-                          {errors.address?.message}
+                          {errors.role?.message}
                         </Form.Label>
                       ) : (
-                        <Form.Label>Мекенжай</Form.Label>
+                        <Form.Label>Қызмет түрі</Form.Label>
                       )}
-
-                      <Form.Control
-                        style={
-                          Boolean(errors.address?.message)
-                            ? {
-                                borderColor: "red",
-                              }
-                            : { borderColor: "#80a8ce" }
-                        }
-                        className="form-control-input"
-                        {...register("address", {
-                          required: "Мекенжайды енгізіңіз",
-                          minLength: {
-                            value: 3,
-                            message: "Мекенжай атауы тым қысқа",
-                          },
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
+                      <Form.Select
+                        selected={job}
+                        onChange={handleJobChange}
+                        className="form-control-input select-input"
+                      >
+                        {jobOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.text}
+                          </option>
+                        ))}
+                      </Form.Select>
                     </Form.Group>
                   </Col>
                   <Col lg={6} xs={12}>
@@ -381,7 +393,7 @@ const Registration = () => {
                 </Row>
 
                 <Col className="col-12 d-flex column justify-content-end align-items-center">
-                  <Link to="/for-student/login">
+                  <Link to="/for-employee/login">
                     <Button variant="primary" className="btn outlined-btn">
                       Кіру парақшасы
                     </Button>
@@ -404,4 +416,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegistrationEmployee;

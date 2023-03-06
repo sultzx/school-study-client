@@ -1,21 +1,29 @@
+import React from "react";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { selectIsAuth, logout } from "../redux/slices/student.js";
+import { selectIsAuth, logout, fetchAuthMe } from "../redux/slices/user.js";
 
 const Header = () => {
-  const isAuth = useSelector(selectIsAuth);
+
+  const isAuth =useSelector(selectIsAuth);
 
   const dispatch = useDispatch();
 
-  const studentData = useSelector((state) => state.student.data);
+  // React.useEffect(() => {
+  //   dispatch(fetchAuthMe())
+  // },[])
 
-  console.log(studentData && studentData);
+  const userData = useSelector((state) => state.user.data);
+
+  console.log(userData && userData);
 
   const onClickLogout = () => {
-    dispatch(logout());
+      dispatch(logout());
     window.localStorage.removeItem("token");
   };
+
+  console.log(userData && userData.role && userData.role)
 
   return (
     <>
@@ -37,10 +45,19 @@ const Header = () => {
             <Nav>
               {isAuth ? (
                 <>
-                {studentData && studentData && <Nav.Link href="/student-profile">
-                  {studentData.lastname} {studentData.firstname}
-                  </Nav.Link>}
-                  
+                {userData && userData.status ?
+                 (<Nav.Link href="/student-profile"> Қош келдіңіз, &nbsp;
+                  {userData && userData.lastname && userData.lastname} &nbsp;
+                  {userData && userData.firstname && userData.firstname}
+                  </Nav.Link> ): '' 
+                }
+                  {
+                  userData && userData.role ?
+                  <Nav.Link href="/employee-profile"> Қош келдіңіз, &nbsp;
+                  {userData.lastname && userData.lastname} &nbsp;
+                  {userData.firstname && userData.firstname}
+                  </Nav.Link> : ''}
+ 
                   <Nav.Link
                     eventKey={2}
                     onClick={() => onClickLogout()}
@@ -51,9 +68,11 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <Nav.Link href="/for-student">Oқушы</Nav.Link>
+                  <Nav.Link href="/for-student"
+                  className="stu-nav-link"
+                  >Oқушы</Nav.Link>
                   <Nav.Link
-                    eventKey={2}
+                    className="emp-nav-link"
                     href="/for-employee"
                   >
                     Қызметкер
