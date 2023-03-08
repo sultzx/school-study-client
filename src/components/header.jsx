@@ -10,9 +10,9 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   dispatch(fetchAuthMe())
-  // },[])
+  React.useEffect(() => {
+    dispatch(fetchAuthMe())
+  },[])
 
   const userData = useSelector((state) => state.user.data);
 

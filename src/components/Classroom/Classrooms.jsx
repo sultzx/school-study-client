@@ -1,5 +1,8 @@
+import React from 'react'
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchAllClassroom } from '../../redux/slices/study.js';
+import Classroom from "./Classroom.jsx";
 
 const Classrooms = () => {
 
@@ -8,8 +11,23 @@ const Classrooms = () => {
 
     const userData = useSelector((state) => state.user.data)
 
-    
-console.log()
+    const sortedClassrooms = []
+
+
+    React.useEffect(() => {
+        dispatch(fetchAllClassroom())
+    }, [])
+
+    const {classrooms} = useSelector((state) => state.study)
+
+
+    classrooms && classrooms.items &&
+        classrooms.items.forEach((item, i) => {
+            if (item.teacher._id == (userData && userData._id)) {
+                sortedClassrooms.push(item)
+            }
+            
+        })
 
     return (<>
         <Container fluid style={{backgroundColor: 'white'}}>
@@ -22,23 +40,14 @@ console.log()
                         <Card.Body>
                             <Row>
                                 {
-                                    userData && userData.classrooms && userData.classrooms.map( (item, i) => (
-                                        <Col lg={2} xs={12}>
-                                            <Card className="static-card profile-access-denied-card">
-                                                <Card.Body  className="text-center d-flex row align-items-center justify-content-center">
-                                                    <h1 >{item.name} {item.abcd}</h1>
-                                                        <h5 >сыныбы</h5>
-                                                  
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
+                                    sortedClassrooms && sortedClassrooms.map( (item, i) => (
+                                        <Classroom 
+                                        key={i}
+                                        id={item._id}
+                                        name={item.name}
+                                        abcd={item.abcd}
+                                        />
                                     )) 
-                                    // userData && userData.classrooms &&
-                                    // userData.classrooms.map((item, i)  (
-                                    //     <Col key={i}>
-
-                                    //     </Col>
-                                    // ))
                                 }
                             </Row>
                             <br />
@@ -46,6 +55,19 @@ console.log()
                             <br />
                             <Row>
                                 <Col className="col-12 d-flex column justify-content-end">
+                                    <Button
+                                    style={{
+                                        margin: '0'
+                                    }}
+                                    onClick={() => {
+                                    window.location.assign(
+                                        `http://localhost:3000/employee-profile`
+                                    );
+                                    }}
+                                    className="btn btn-primary outlined-btn"
+                                >
+                                    Артқа қайту
+                                </Button>
                                     <Button className="btn btn-primary signup shadow" href="/create-classroom">Жаңа сынып қосу</Button>
                                 </Col>
                             </Row>

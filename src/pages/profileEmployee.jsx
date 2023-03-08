@@ -1,23 +1,14 @@
 import React from "react";
-import {
-  Tab,
-  Nav,
-  Container,
-  Row,
-  Col,
-  Button,
-  Card
-} from "react-bootstrap";
+import { Tab, Nav, Container, Row, Col, Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import "react-phone-number-input/style.css";
-import { fetchAuthMe } from "../redux/slices/user.js"
+import { fetchAuthMe } from "../redux/slices/user.js";
 
 import ProfileDetail from "../components/Employee/profileDetail.jsx";
 import girl_adenied from "../images/girl_adenied.png";
 import Classrooms from "../components/Classroom/Classrooms.jsx";
 
 const Profile = () => {
-
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -28,7 +19,7 @@ const Profile = () => {
 
   const isStatus = userData && userData.status != "accepted";
 
-  console.log(userData && userData)
+  console.log(userData && userData);
 
   return (
     <Container fluid className="profile-page-container">
@@ -80,71 +71,95 @@ const Profile = () => {
                           </Nav.Link>
                         </Nav.Item>
 
-                        <hr style={{ margin: "0px" }} />
-                        <Nav.Item>
-                          <Nav.Link
-                            className="btn btn-primary outlined-btn p-link-btn"
-                            href="/classrooms"
-                            style={{
-                              padding: "6px",
-                              margin: "0",
-                              color: "#00509D",
-                              background: "transparent",
-                            }}
-                          >
-                            Сыныптар
-                          </Nav.Link>
-                        </Nav.Item>
+                        {userData &&
+                        userData.role &&
+                        userData.role == "moderator" ? (
+                          <>
+                            <hr style={{ margin: "0px" }} />
+                            <Nav.Item>
+                              <Nav.Link
+                                className="btn btn-primary outlined-btn p-link-btn"
+                                href="/student-requests"
+                                style={{
+                                  padding: "6px",
+                                  margin: "0",
+                                  color: "#00509D",
+                                  background: "transparent",
+                                }}
+                              >
+                                Сұраныстар
+                              </Nav.Link>
+                            </Nav.Item>
+                          </>
+                        ) : (
+                          <>
+                            <hr style={{ margin: "0px" }} />
+                            <Nav.Item>
+                              <Nav.Link
+                                className="btn btn-primary outlined-btn p-link-btn"
+                                href="/classrooms"
+                                style={{
+                                  padding: "6px",
+                                  margin: "0",
+                                  color: "#00509D",
+                                  background: "transparent",
+                                }}
+                              >
+                                Сыныптар
+                              </Nav.Link>
+                            </Nav.Item>
 
-                        <hr style={{ margin: "0px" }} />
-                        <Nav.Item>
-                          <Nav.Link
-                            className="btn btn-primary outlined-btn p-link-btn"
-                            style={{
-                              padding: "6px",
-                              margin: "0",
-                              color: "#00509D",
-                              background: "transparent",
-                            }}
-                          >
-                            Сабақтар
-                          </Nav.Link>
-                        </Nav.Item>
+                            <hr style={{ margin: "0px" }} />
+                            <Nav.Item>
+                              <Nav.Link
+                                className="btn btn-primary outlined-btn p-link-btn"
+                                style={{
+                                  padding: "6px",
+                                  margin: "0",
+                                  color: "#00509D",
+                                  background: "transparent",
+                                }}
+                              >
+                                Сабақтар
+                              </Nav.Link>
+                            </Nav.Item>
 
-                        <hr style={{ margin: "0px" }} />
-                        <Nav.Item>
-                          <Nav.Link
-                            className="btn btn-primary outlined-btn p-link-btn"
-                            style={{
-                              padding: "6px",
-                              margin: "0",
-                              color: "#00509D",
-                              background: "transparent",
-                            }}
-                          >
-                            Тесттер
-                          </Nav.Link>
-                        </Nav.Item>
+                            <hr style={{ margin: "0px" }} />
+                            <Nav.Item>
+                              <Nav.Link
+                                className="btn btn-primary outlined-btn p-link-btn"
+                                style={{
+                                  padding: "6px",
+                                  margin: "0",
+                                  color: "#00509D",
+                                  background: "transparent",
+                                }}
+                              >
+                                Тесттер
+                              </Nav.Link>
+                            </Nav.Item>
 
-                        <hr style={{ margin: "0px" }} />
-                        <Nav.Item>
-                          <Nav.Link
-                            className="btn btn-primary outlined-btn p-link-btn"
-                            style={{
-                              padding: "6px",
-                              margin: "0",
-                              color: "#00509D",
-                              background: "transparent",
-                            }}
-                          >
-                            Емтихан
-                          </Nav.Link>
-                        </Nav.Item>
+                            <hr style={{ margin: "0px" }} />
+                            <Nav.Item>
+                              <Nav.Link
+                                className="btn btn-primary outlined-btn p-link-btn"
+                                style={{
+                                  padding: "6px",
+                                  margin: "0",
+                                  color: "#00509D",
+                                  background: "transparent",
+                                }}
+                              >
+                                Емтихан
+                              </Nav.Link>
+                            </Nav.Item>
+                          </>
+                        )}
+
                         <hr style={{ margin: "0px" }} />
                       </Nav>
                     </div>
                   </Row>
-                  
                 </Card.Body>
               </Card>
               <br />
@@ -156,9 +171,11 @@ const Profile = () => {
                     lastname={userData && userData.lastname}
                     firstname={userData && userData.firstname}
                     patronymic={userData && userData.patronymic}
+                    email={userData && userData.email}
                     phone={userData && userData.phone}
                     classrooms={userData && userData.classrooms}
-                    subject={userData && userData.subject.name}
+                    subject={userData && userData.subject && userData.subject.name}
+                    role={userData && userData.role}
                   />
                   <br />
                 </Tab.Pane>

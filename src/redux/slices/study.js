@@ -13,35 +13,78 @@ export const fetchCreateClassroom = createAsyncThunk('auth/fetchCreateClassroom'
       } 
 })
 
+export const fetchRemoveClassroom = createAsyncThunk('auth/fetchRemoveClassroom', async (id, {rejectWithValue}) => {
+    try {
+        const  response = await axios.delete(`/api/study/classroom/${id}`)
+          return response.data  
+      } catch (error) {
+          if (!error.response) {
+              throw error
+          }
+          return rejectWithValue(error.response.data)
+      } 
+})
+
+export const fetchAllClassroom = createAsyncThunk('auth/fetchAllClassroom', async () => {
+
+        const  {data} = await axios.get(`/api/study/classroom/all`)
+          return data
+
+})
+
 /////////////////////////////////////////////////////
 
 const initialState = {
-    data: null,
-    status: 'loading',
-    error: ''
+    classrooms: {
+       items: [],
+        status: 'loading',
+        error: '' 
+    }
+    
 }
 
 const studySlice = createSlice({
     name: 'study',
     initialState,
     reducers: {
-        logout: (state) => {
-            state.data = null
-            state.status = 'loaded'
-        }
     },
     extraReducers: {
+        [fetchAllClassroom.pending]: (state) => {
+            state.classrooms.status = 'loading'
+            state.classrooms.items = []
+        },
+        [fetchAllClassroom.fulfilled]: (state, action) => {
+            state.classrooms.status = 'loaded'
+            state.classrooms.items = action.payload
+        },
+        [fetchAllClassroom.rejected]: (state) => {
+            state.classrooms.status = 'error'
+            state.classrooms.items = []
+        },
+
         [fetchCreateClassroom.pending]: (state) => {
-            state.status = 'loading'
-            state.data = null
+            state.classrooms.status = 'loading'
+            state.classrooms.items = []
         },
         [fetchCreateClassroom.fulfilled]: (state, action) => {
-            state.status = 'loaded'
-            state.data = action.payload
+            state.classrooms.status = 'loaded'
+            state.classrooms.items = action.payload
         },
         [fetchCreateClassroom.rejected]: (state) => {
-            state.status = 'error'
-            state.data = null
+            state.classrooms.status = 'error'
+            state.classrooms.items = []
+        },
+
+        [fetchRemoveClassroom.pending]: (state, action) => {
+            state.classrooms.status = 'loading'
+            state.classrooms.items = state.classrooms.items.filter(
+                (obj) => obj._id != action.meta.arg
+            );
+        },
+        
+        [fetchRemoveClassroom.rejected]: (state, action) => {
+            state.classrooms.status = 'error'
+            state.classrooms.items = action.payload
         },
 
     }

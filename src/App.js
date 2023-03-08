@@ -10,6 +10,9 @@ import Classrooms from "./components/Classroom/Classrooms.jsx";
 import { useDispatch } from "react-redux";
 import * as fetches from './redux/slices/user.js'
 import CreateClassroom from "./components/Classroom/CreateClassroom.jsx";
+import Requests from "./components/Employee/Moderator/Requests.jsx";
+import ClassroomFull from './components/Classroom/ClassroomFull.jsx'
+import InsertStudents from "./components/Classroom/InsertStudents.jsx";
 
 function App() {
   
@@ -40,6 +43,13 @@ function App() {
 
         <Route path="/classrooms" element={<><Header/><Classrooms/></> } />
         <Route path="/create-classroom" element={<><Header/><CreateClassroom/></> } />
+
+        <Route path="/student-requests" element={<><Header/><Requests/></> } />
+        
+        <Route path="/classrooms/:id" element={<><Header/><ClassroomFull/></> } />
+        <Route path="/classrooms/:id/insert-students" element={<><Header/><InsertStudents/></> } />
+
+
     </Routes>
   </>)
 }

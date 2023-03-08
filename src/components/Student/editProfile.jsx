@@ -74,7 +74,7 @@ const EditProfile = () => {
             patronymic: values.patronymic,
             phone: phone && phone,
             address: values.address,
-            birthday: birthday,
+            // birthday: birthday,
             father_lname: values.father_lname,
             father_fname: values.father_fname,
             father_patron: values.father_patron,

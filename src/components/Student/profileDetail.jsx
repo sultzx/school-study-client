@@ -6,11 +6,11 @@ import {
   Card
 } from "react-bootstrap";
 import "react-phone-number-input/style.css";
-import { Person, Telephone, PinMap, Calendar2X } from "react-bootstrap-icons";
+import { Person, Telephone, PinMap, Calendar2X, EnvelopePaper } from "react-bootstrap-icons";
 
 
 const profileDetail = ({
-                lastname, firstname, patronymic, phone, address, birthday, 
+                lastname, firstname, patronymic, email, phone, address, birthday, 
                 father_lname, father_fname, father_patron, father_phone, 
                 mother_lname, mother_fname, mother_patron, mother_phone,
                 classroom, abcd}) => {
@@ -24,8 +24,10 @@ const profileDetail = ({
                     <hr />
                     <h5 style={{margin: '16px 0'}}><Person size={'22px'} color="#00509d"/> &nbsp; {lastname} {firstname} {patronymic}</h5>
                     <h5 style={{margin: '16px 0'}}><Telephone size={'22px'} color="#00509d"/> &nbsp; {phone}</h5>
+                    <h5 style={{margin: '16px 0'}}><EnvelopePaper size={'22px'} color="#00509d"/> &nbsp; {email}</h5>
+
                     <h5 style={{margin: '16px 0'}}><PinMap size={'22px'} color="#00509d"/> &nbsp; {address}</h5>
-                    <h5 style={{margin: '16px 0'}}><Calendar2X size={'22px'} color="#00509d"/> &nbsp; {birthday}</h5>
+                    
                     <hr />
                     <h6 style={{margin: '16px 0'}}><Person size={'22px'} color="#00509d"/> &nbsp;  {father_lname} {father_fname} {father_patron}</h6>
                     <h6 style={{margin: '16px 0'}}><Telephone size={'22px'} color="#00509d"/> &nbsp; {father_phone}</h6>

@@ -67,7 +67,9 @@ const EditProfile = () => {
             firstname: values.firstname,
             patronymic: values.patronymic,
             phone: phone && phone,
-            subject: subjectId && subjectId
+            subject: userData && userData.role
+              && userData.role == 'teacher' ? subjectId && subjectId
+              : ''
           })
         );
   
@@ -236,55 +238,57 @@ const EditProfile = () => {
                   </Col>
                  
                 </Row>
+                {userData && userData.role && userData.role == 'teacher' && 
                 <Row>
-                  <Col className="col-12">
-                    <hr />
-                  </Col>
-                   <Col lg={12} xs={12}>
-                      <Row>
-                        <Col lg={3} xs={12} className="d-flex column justify-content-center align-items-center">
-                          <Button className="btn btn-primary flex-fill subject-btn subject-kaz-img"
-                          onClick={() => setSubjectId('640644875665304b307c91af')}
-                          >
-                            <p>
-                              Қазақ тілі
-                            </p>
-                            
-                          </Button>
-                        </Col>
-                        <Col lg={3} xs={12} className="d-flex column justify-content-center align-items-center">
-                          <Button className="btn btn-primary flex-fill subject-btn subject-math-img"
-                          onClick={() => setSubjectId('640644b15665304b307c91b1')}
-                          >
-                            <p>
-                              Математика
-                            </p>
-                            
-                          </Button>
-                        </Col>
-                        <Col lg={3} xs={12} className="d-flex column justify-content-center align-items-center">
-                          <Button className="btn btn-primary flex-fill subject-btn subject-history-img"
-                          onClick={() => setSubjectId('640644c85665304b307c91b3')}
-                          >
-                            <p>
-                              Қазақстан тарихы
-                            </p>
-                            
-                          </Button>
-                        </Col>
-                        <Col lg={3} xs={12} className="d-flex column justify-content-center align-items-center">
-                          <Button className="btn btn-primary flex-fill subject-btn subject-english-img"
-                          onClick={() => setSubjectId('640644de5665304b307c91b5')}
-                          >
-                            <p>
-                              Ағылшын
-                            </p>
-                            
-                          </Button>
-                        </Col>
-                      </Row>
-                  </Col>
-                </Row>
+                <Col className="col-12">
+                  <hr />
+                </Col>
+                 <Col lg={12} xs={12}>
+                    <Row>
+                      <Col lg={3} xs={12} className="d-flex column justify-content-center align-items-center">
+                        <Button className="btn btn-primary flex-fill subject-btn subject-kaz-img"
+                        onClick={() => setSubjectId('640644875665304b307c91af')}
+                        >
+                          <p>
+                            Қазақ тілі
+                          </p>
+                          
+                        </Button>
+                      </Col>
+                      <Col lg={3} xs={12} className="d-flex column justify-content-center align-items-center">
+                        <Button className="btn btn-primary flex-fill subject-btn subject-math-img"
+                        onClick={() => setSubjectId('640644b15665304b307c91b1')}
+                        >
+                          <p>
+                            Математика
+                          </p>
+                          
+                        </Button>
+                      </Col>
+                      <Col lg={3} xs={12} className="d-flex column justify-content-center align-items-center">
+                        <Button className="btn btn-primary flex-fill subject-btn subject-history-img"
+                        onClick={() => setSubjectId('640644c85665304b307c91b3')}
+                        >
+                          <p>
+                            Қазақстан тарихы
+                          </p>
+                          
+                        </Button>
+                      </Col>
+                      <Col lg={3} xs={12} className="d-flex column justify-content-center align-items-center">
+                        <Button className="btn btn-primary flex-fill subject-btn subject-english-img"
+                        onClick={() => setSubjectId('640644de5665304b307c91b5')}
+                        >
+                          <p>
+                            Ағылшын
+                          </p>
+                          
+                        </Button>
+                      </Col>
+                    </Row>
+                </Col>
+              </Row>}
+                
 
                 <Col className="col-12 d-flex column justify-content-end align-items-center">
            
@@ -293,7 +297,7 @@ const EditProfile = () => {
                     </Button>
                 
                   <Button
-                  disabled={!subjectId}
+                  disabled={!isValid}
                     variant="primary"
                     className="btn-signup"
                     type="submit"

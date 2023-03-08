@@ -293,6 +293,7 @@ const Profile = () => {
                     lastname={userData && userData.lastname}
                     firstname={userData && userData.firstname}
                     patronymic={userData && userData.patronymic}
+                    email={userData && userData.email}
                     phone={userData && userData.phone}
                     address={userData && userData.address}
                     birthday={userData && userData.birthday}

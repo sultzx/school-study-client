@@ -80,9 +80,12 @@ export const fetchAuthMe= createAsyncThunk('auth/fetchAuthMe', async () => {
     return data
 })
 
-
-
 const initialState = {
+    all_students: {
+        items: [],
+        status: 'loading',
+        error: '' 
+    } ,
     data: null,
     status: 'loading',
     error: ''
@@ -194,7 +197,8 @@ const userSlice = createSlice({
         [fetchUpdateEmployee.rejected]: (state, action) => {
             state.status = 'error'
             state.error = action.payload
-        }
+        },
+
     }
 })
 
