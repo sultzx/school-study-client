@@ -13,7 +13,7 @@ const profileDetail = ({
                 lastname, firstname, patronymic, email, phone, address, birthday, 
                 father_lname, father_fname, father_patron, father_phone, 
                 mother_lname, mother_fname, mother_patron, mother_phone,
-                classroom, abcd}) => {
+                classroom}) => {
     return (<>
         <Card className="static-card profile-access-denied-card">
             <Card.Body>
@@ -38,8 +38,8 @@ const profileDetail = ({
                     <Col className="col-lg-4 col-xs-12">
                         <Card className="student-class-abcd">
                             <Card.Body className="text-center">
-                                <h1>{classroom} {abcd}</h1>
-                                {classroom && abcd &&  <h6>сынып оқушысы</h6>}
+                                <h1>{classroom && `${classroom.name}${classroom.abcd}`}</h1>
+                                {classroom  && <h6>сынып оқушысы</h6>}
                             </Card.Body>
                         </Card>
                     </Col>

@@ -49,12 +49,15 @@ const dispatch = useDispatch()
                                 classroom && classroom[0] && 
                                 classroom[0].students && classroom[0].students.map((stud, i) => (
                                     <Stud
+                                        id={stud && stud._id}
                                         lastname={stud && stud.lastname}
                                         firstname={stud && stud.firstname}
                                         patronymic={stud && stud.patronymic}
                                         phone={stud && stud.phone}
                                         email={stud && stud.email}
                                         classroom={stud && stud.classroom && stud.classroom}
+                                        classroom_id={ classroom[0]._id}
+                                        avatar={stud && stud.avatar}
                                     />
                                 ))
                             }

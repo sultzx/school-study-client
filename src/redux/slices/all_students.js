@@ -34,6 +34,19 @@ export const fetchSetStudentClassroom = createAsyncThunk('auth/fetchSetStudentCl
       }    
 })
 
+export const fetchDeleteStudentFromClassroom = createAsyncThunk('auth/fetchSetStudentClassroom', async (params, {rejectWithValue}) => {
+    try {
+        const  response = await axios.patch('api/user/delete-student-classroom', params)
+          return response.data
+
+      } catch (error) {
+          if (!error.response) {
+              throw error
+          }
+          return rejectWithValue(error.response.data)
+      }    
+})
+
 const initialState = {
     students: {
         items: [],
@@ -85,6 +98,18 @@ const all_studentsSlice = createSlice({
         },
         
         [fetchSetStudentClassroom.rejected]: (state, action) => {
+            state.students.status = 'error'
+            state.students.error = action.payload
+        },
+
+
+        [fetchDeleteStudentFromClassroom.pending]: (state, action) => {
+            state.students.items = state.students.items.filter(
+                (obj) => obj._id != action.meta.arg
+            );
+        },
+        
+        [fetchDeleteStudentFromClassroom.rejected]: (state, action) => {
             state.students.status = 'error'
             state.students.error = action.payload
         }

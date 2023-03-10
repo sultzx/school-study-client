@@ -6,7 +6,10 @@ import { fetchAuthMe } from "../redux/slices/user.js";
 
 import ProfileDetail from "../components/Employee/profileDetail.jsx";
 import girl_adenied from "../images/girl_adenied.png";
-import Classrooms from "../components/Classroom/Classrooms.jsx";
+import axios from "../axios.js";
+import alt from '../images/altimg.png'
+import Questions from "../components/Employee/Questions/Questions.jsx";
+import CreateChapter from "../components/Employee/Lessons/CreateChapter.jsx";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -15,9 +18,26 @@ const Profile = () => {
     dispatch(fetchAuthMe());
   }, []);
 
+  const inputFileRef = React.useRef(null);
+
+  const handleChangeFile = async (event) => {
+    try {
+      const formData = new FormData();
+      const file = event.target.files[0];
+      formData.append("image", file);
+      const { data } = await axios.post("/api/upload/employee-avatar", formData);
+      console.log(data.url);
+      console.log("asdasd");
+    } catch (error) {
+      console.warn(error);
+      alert("Бейнені көшіру кезінде қате шықты");
+    }
+    dispatch(fetchAuthMe());
+  };
+
   const userData = useSelector((state) => state.user.data);
 
-  const isStatus = userData && userData.status != "accepted";
+  const isStatus = userData && userData.status == "accepted";
 
   console.log(userData && userData);
 
@@ -38,10 +58,15 @@ const Profile = () => {
                 <Card.Body>
                   <Row className="d-flex row align-items-start justify-content-center">
                     <img
-                      src={girl_adenied}
+                      onClick={() => inputFileRef.current.click()}
+                      onChange={handleChangeFile}
+                      style={{height: '300px', padding: '8px'}}
+                      src={userData && userData.avatar ? 
+                        `http://localhost:5000${userData && userData.avatar}`: alt}
                       className="flex-fill img-fluid profile-avatar-img"
                       alt=""
                     />
+                    <input type="file" hidden onChange={handleChangeFile} ref={inputFileRef}  />
                     <h4 className="text-center" style={{ marginTop: "24px" }}>
                       {userData && userData.lastname}&nbsp;
                       {userData && userData.firstname}
@@ -113,6 +138,7 @@ const Profile = () => {
                             <Nav.Item>
                               <Nav.Link
                                 className="btn btn-primary outlined-btn p-link-btn"
+                                href="/create-chapter"
                                 style={{
                                   padding: "6px",
                                   margin: "0",
@@ -153,6 +179,22 @@ const Profile = () => {
                                 Емтихан
                               </Nav.Link>
                             </Nav.Item>
+
+                            <hr style={{ margin: "0px" }} />
+                            <Nav.Item>
+                              <Nav.Link
+                               eventKey="contact"
+                                className="btn btn-primary outlined-btn p-link-btn"
+                                style={{
+                                  padding: "6px",
+                                  margin: "0",
+                                  color: "#00509D",
+                                  background: "transparent",
+                                }}
+                              >
+                                Оқушымен байланыс
+                              </Nav.Link>
+                            </Nav.Item>
                           </>
                         )}
 
@@ -186,6 +228,11 @@ const Profile = () => {
                 <Tab.Pane eventKey="calendar">
                   <br />
                 </Tab.Pane>
+                <Tab.Pane eventKey="contact">
+                  <Questions/>
+                  <br />
+                </Tab.Pane>
+
               </Tab.Content>
             </Col>
           </Row>

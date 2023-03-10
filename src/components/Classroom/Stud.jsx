@@ -2,6 +2,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Person, Telephone, EnvelopePaper } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
 import {
+  fetchDeleteStudentFromClassroom,
   fetchGetAllStudents,
   fetchSetStudentClassroom,
 } from "../../redux/slices/all_students.js";
@@ -20,18 +21,26 @@ const Stud = ({
 }) => {
   const dispatch = useDispatch();
 
-  const setStatus = async () => {
+  console.log('classroom_id', classroom_id)
+
+  const deleteStudentClassroom = async () => {
     const data = await dispatch(
-      fetchSetStudentClassroom({
+      fetchDeleteStudentFromClassroom({
         classroomId: classroom_id,
         studentId: id,
       })
     );
-    if ("token" in data.payload) {
-      window.localStorage.setItem("token", data.payload.token);
+
+    if(data && data.payload.success) {
+      if ("token" in data.payload) {
+        window.localStorage.setItem("token", data.payload.token);
+      }
+         window.location.assign(`http://localhost:3000/classrooms/${classroom_id}`)
+    } else {
+      window.alert('Оқушыны өшіру кезінде қате шықты')
     }
-    //   window.location.assign(`http://localhost:3000/classrooms/${classroom_id}`)
-  };
+
+     };
 
   return (
     <Col
@@ -55,7 +64,7 @@ const Stud = ({
                 width: "auto",
                 height: "290px",
               }}
-              src={avatar ? avatar : alt}
+              src={avatar ? `http://localhost:5000${avatar}` : alt}
               alt=""
             />
           </div>
@@ -81,11 +90,18 @@ const Stud = ({
 
           <hr />
           <div className="text-end">
+          <button
+              className="btn btn-primary outlined-btn"
+              style={{margin: '0'}}
+              onClick={deleteStudentClassroom}
+            >
+              Өшіру
+            </button>
             <button
               className="btn btn-primary signup shadow"
-              onClick={setStatus}
+              onClick={() => {}}
             >
-              Сыныпқа қосу
+              Толығырақ
             </button>
           </div>
         </Card.Body>

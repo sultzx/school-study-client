@@ -20,17 +20,43 @@ import { fetchAuthMe } from "../redux/slices/user.js";
 
 import ProfileDetail from "../components/Student/profileDetail.jsx";
 import Rating from "../components/Student/rating.jsx";
-import Calendar from "../components/Student/calendar.jsx"
+import Calendar from "../components/Student/calendar.jsx";
+import AskTeacher from "../components/Student/askTeacher.jsx";
+
 import girl_adenied from "../images/girl_adenied.png";
+import alt from "../images/altimg.png";
+import axios from "../axios.js";
+
 
 const Profile = () => {
-  const dispatch = useDispatch()
-  React.useEffect(() => {
-    dispatch(fetchAuthMe())
-  }, [])
+  const inputFileRef = React.useRef(null);
+
+  const dispatch = useDispatch();
+
+  // React.useEffect(() => {
+  //   dispatch(fetchAuthMe())
+  // }, [])
+
   const userData = useSelector((state) => state.user.data);
 
-  const isStatus = userData && userData.status != 'accepted';
+  console.log("userData", userData && userData);
+
+  const isStatus = userData && userData.status != "accepted";
+
+  const handleChangeFile = async (event) => {
+    try {
+      const formData = new FormData();
+      const file = event.target.files[0];
+      formData.append("image", file);
+      const { data } = await axios.post("/api/upload/student-avatar", formData);
+      console.log(data.url);
+      console.log("asdasd");
+    } catch (error) {
+      console.warn(error);
+      alert("Бейнені көшіру кезінде қате шықты");
+    }
+    dispatch(fetchAuthMe());
+  };
 
   const dataA = [
     ["Pac Man", "Percentage"],
@@ -86,24 +112,7 @@ const Profile = () => {
     bars: "horizontal",
   };
 
-  // const userData = {
-  //   lastname: "Жумагалиев",
-  //   firstname: "Султангали",
-  //   patronymic: "Қайсарұлы",
-  //   phone: "87765111441",
-  //   address: "Ержанова, 43",
-  //   birthday: "27-02-1998",
-  //   father_lname: "Утембетов",
-  //   father_fname: "Қайсар",
-  //   father_patron: "Жумагалиевич",
-  //   father_phone: "87011651898",
-  //   mother_lname: "Тулепова",
-  //   mother_fname: "Кулнар",
-  //   mother_patron: "Абекеновна",
-  //   mother_phone: "87011651949",
-  //   classroom: "",
-  //   abcd: "",
-  // };
+  console.log(userData && userData);
 
   if (!isStatus) {
     return (
@@ -161,15 +170,33 @@ const Profile = () => {
                 <Card.Body>
                   <Row className="d-flex row align-items-start justify-content-center">
                     <img
-                      src={girl_adenied}
-                      className="flex-fill img-fluid profile-avatar-img"
+                      style={{ height: "300px", padding: "8px" }}
+                      onClick={() => inputFileRef.current.click()}
+                      src={
+                        userData && userData.avatar
+                          ? `http://localhost:5000${
+                              userData && userData.avatar
+                            }`
+                          : alt
+                      }
+                      className=" profile-avatar-img"
                       alt=""
                     />
+                    <input
+                      type="file"
+                      onChange={handleChangeFile}
+                      hidden
+                      ref={inputFileRef}
+                    />
                     <h4 className="text-center" style={{ marginTop: "24px" }}>
-                      {userData && userData.lastname}&nbsp;{userData && userData.firstname}
-                      &nbsp; {userData && userData.patronymic}  
+                      {userData && userData.lastname}&nbsp;
+                      {userData && userData.firstname}
+                      &nbsp; {userData && userData.patronymic}
                     </h4>
-                    <Button className="btn btn-primary edit-profile-btn" href="/edit-student-profile">
+                    <Button
+                      className="btn btn-primary edit-profile-btn"
+                      href="/edit-student-profile"
+                    >
                       Профильді өңдеу
                     </Button>
                     <div className="text-center">
@@ -269,6 +296,7 @@ const Profile = () => {
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
+                            eventKey="ask"
                             style={{
                               padding: "6px",
                               margin: "0",
@@ -306,7 +334,6 @@ const Profile = () => {
                     mother_patron={userData && userData.mother_patron}
                     mother_phone={userData && userData.mother_phone}
                     classroom={userData && userData.classroom}
-                    abcd={userData && userData.abcd}
                   />
                   <br />
                 </Tab.Pane>
@@ -315,8 +342,25 @@ const Profile = () => {
                   <br />
                 </Tab.Pane>
                 <Tab.Pane eventKey="calendar">
-                  <Calendar/>
-                <br /></Tab.Pane>
+                  <Calendar />
+                  <br />
+                </Tab.Pane>
+                <Tab.Pane eventKey="subjects">
+                  <Calendar />
+                  <br />
+                </Tab.Pane>
+                <Tab.Pane eventKey="subjects">
+                  <Calendar />
+                  <br />
+                </Tab.Pane>
+                <Tab.Pane eventKey="subjects">
+                  <Calendar />
+                  <br />
+                </Tab.Pane>
+                <Tab.Pane eventKey="ask">
+                  < AskTeacher/>
+                  <br />
+                </Tab.Pane>
               </Tab.Content>
             </Col>
           </Row>

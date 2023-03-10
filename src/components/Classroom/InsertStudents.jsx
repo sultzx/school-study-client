@@ -35,6 +35,7 @@ const InsertStudents = () => {
                 students.items &&
                 students.items.map((item, i) => (
                     item.status != 'denied' &&
+                    item.classroom == null &&
                   <Students
                     id={item && item._id}
                     classroom_id={id}
@@ -44,6 +45,7 @@ const InsertStudents = () => {
                     email={item && item.email}
                     phone={item && item.phone}
                     classroom={item && item.classroom}
+                    avatar={item && item.avatar}
                   />
                 ))}
             </Row>

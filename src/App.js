@@ -13,7 +13,10 @@ import CreateClassroom from "./components/Classroom/CreateClassroom.jsx";
 import Requests from "./components/Employee/Moderator/Requests.jsx";
 import ClassroomFull from './components/Classroom/ClassroomFull.jsx'
 import InsertStudents from "./components/Classroom/InsertStudents.jsx";
-
+import Questions from "./components/Student/Questions/Questions.jsx";
+import CreateChapter from "./components/Employee/Lessons/CreateChapter.jsx";
+import CreateLesson from "./components/Employee/Lessons/CreateLesson.jsx";
+import Lessons from "./components/Employee/Lessons/Lessons.jsx";
 function App() {
   
   const dispatch = useDispatch()
@@ -48,6 +51,13 @@ function App() {
         
         <Route path="/classrooms/:id" element={<><Header/><ClassroomFull/></> } />
         <Route path="/classrooms/:id/insert-students" element={<><Header/><InsertStudents/></> } />
+
+        <Route path="/student-questions" element={<><Header/><Questions/></> } />
+
+        <Route path="/create-chapter" element={<><Header/><CreateChapter/></> } />
+        <Route path="/create-lesson" element={<><Header/><CreateLesson/></> } />
+
+        <Route path="/all-lessons" element={<><Header/><Lessons/></> } />
 
 
     </Routes>

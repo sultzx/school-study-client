@@ -81,7 +81,7 @@ const Students = ({
                 width: "auto",
                 height: "290px",
               }}
-              src={avatar ? avatar : altImg}
+              src={avatar ? `http://localhost:5000${avatar}` : altImg}
               alt=""
             />
           </div>
