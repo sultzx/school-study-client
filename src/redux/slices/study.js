@@ -123,14 +123,68 @@ export const fetchCreateLesson = createAsyncThunk(
 );
 
 export const fetchGetLessons = createAsyncThunk(
-    "auth/fetchGetLessons",
-    async ({ rejectWithValue }) => {
-      const { data } = await axios.post("/api/study/all-lessons");
-      return data;
-    }
-  );
+  "auth/fetchGetLessons",
+  async () => {
+    const { data } = await axios.get("/api/study/all-lessons");
+    return data;
+  }
+);
 
 ////////////////////////////////////////////////
+
+export const fetchCreateTestQuestion = createAsyncThunk(
+  "auth/fetchCreateTestQuestion",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "/api/study/create-test-question",
+        params
+      );
+      return response.data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchGetTestQuestions = createAsyncThunk(
+  "auth/fetchGetTestQuestions",
+  async () => {
+    const { data } = await axios.get("/api/study/all-test-questions");
+    return data;
+  }
+);
+
+///////////////////////////////////////////////
+
+export const fetchCreateExamQuestion = createAsyncThunk(
+  "auth/fetchCreateExamQuestion",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "/api/study/create-exam-question",
+        params
+      );
+      return response.data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchGetExamQuestions = createAsyncThunk(
+  "auth/fetchGetExamQuestions",
+  async () => {
+    const { data } = await axios.get("/api/study/all-exam-questions");
+    return data;
+  }
+);
 
 const initialState = {
   classrooms: {
@@ -150,6 +204,16 @@ const initialState = {
   },
 
   lessons: {
+    items: [],
+    status: "loading",
+    error: "",
+  },
+  test: {
+    items: [],
+    status: "loading",
+    error: "",
+  },
+  exam: {
     items: [],
     status: "loading",
     error: "",
@@ -241,57 +305,113 @@ const studySlice = createSlice({
     },
     /////////////////////////////////////////////
     [fetchCreateChapter.pending]: (state) => {
-        state.chapters.status = "loading";
-        state.chapters.items = [];
-      },
-      [fetchCreateChapter.fulfilled]: (state, action) => {
-        state.chapters.status = "loaded";
-        state.chapters.items = action.payload;
-      },
-      [fetchCreateChapter.rejected]: (state) => {
-        state.chapters.status = "error";
-        state.chapters.items = [];
-      },
+      state.chapters.status = "loading";
+      state.chapters.items = [];
+    },
+    [fetchCreateChapter.fulfilled]: (state, action) => {
+      state.chapters.status = "loaded";
+      state.chapters.items = action.payload;
+    },
+    [fetchCreateChapter.rejected]: (state) => {
+      state.chapters.status = "error";
+      state.chapters.items = [];
+    },
 
-      [fetchGetChapters.pending]: (state) => {
-        state.chapters.status = "loading";
-        state.chapters.items = [];
-      },
-      [fetchGetChapters.fulfilled]: (state, action) => {
-        state.chapters.status = "loaded";
-        state.chapters.items = action.payload;
-      },
-      [fetchGetChapters.rejected]: (state) => {
-        state.chapters.status = "error";
-        state.chapters.items = [];
-      },
-//////////////////////////////////////////////////
+    [fetchGetChapters.pending]: (state) => {
+      state.chapters.status = "loading";
+      state.chapters.items = [];
+    },
+    [fetchGetChapters.fulfilled]: (state, action) => {
+      state.chapters.status = "loaded";
+      state.chapters.items = action.payload;
+    },
+    [fetchGetChapters.rejected]: (state) => {
+      state.chapters.status = "error";
+      state.chapters.items = [];
+    },
+    //////////////////////////////////////////////////
 
-[fetchCreateLesson.pending]: (state) => {
-    state.lessons.status = "loading";
-    state.lessons.items = [];
-  },
-  [fetchCreateLesson.fulfilled]: (state, action) => {
-    state.lessons.status = "loaded";
-    state.lessons.items = action.payload;
-  },
-  [fetchCreateLesson.rejected]: (state) => {
-    state.lessons.status = "error";
-    state.lessons.items = [];
-  },
+    [fetchCreateLesson.pending]: (state) => {
+      state.lessons.status = "loading";
+      state.lessons.items = [];
+    },
+    [fetchCreateLesson.fulfilled]: (state, action) => {
+      state.lessons.status = "loaded";
+      state.lessons.items = action.payload;
+    },
+    [fetchCreateLesson.rejected]: (state) => {
+      state.lessons.status = "error";
+      state.lessons.items = [];
+    },
 
-  [fetchGetLessons.pending]: (state) => {
-    state.lessons.status = "loading";
-    state.lessons.items = [];
-  },
-  [fetchGetLessons.fulfilled]: (state, action) => {
-    state.lessons.status = "loaded";
-    state.lessons.items = action.payload;
-  },
-  [fetchGetLessons.rejected]: (state) => {
-    state.lessons.status = "error";
-    state.lessons.items = [];
-  },
+    [fetchGetLessons.pending]: (state) => {
+      state.lessons.status = "loading";
+      state.lessons.items = [];
+    },
+    [fetchGetLessons.fulfilled]: (state, action) => {
+      state.lessons.status = "loaded";
+      state.lessons.items = action.payload;
+    },
+    [fetchGetLessons.rejected]: (state) => {
+      state.lessons.status = "error";
+      state.lessons.items = [];
+    },
+
+    //////////////////////////////////////////////////
+
+    [fetchCreateTestQuestion.pending]: (state) => {
+      state.test.status = "loading";
+      state.test.items = [];
+    },
+    [fetchCreateTestQuestion.fulfilled]: (state, action) => {
+      state.test.status = "loaded";
+      state.test.items = action.payload;
+    },
+    [fetchCreateTestQuestion.rejected]: (state) => {
+      state.test.status = "error";
+      state.test.items = [];
+    },
+
+    [fetchGetTestQuestions.pending]: (state) => {
+      state.test.status = "loading";
+      state.test.items = [];
+    },
+    [fetchGetTestQuestions.fulfilled]: (state, action) => {
+      state.test.status = "loaded";
+      state.test.items = action.payload;
+    },
+    [fetchGetTestQuestions.rejected]: (state) => {
+      state.test.status = "error";
+      state.test.items = [];
+    },
+
+    ///////////////////////////////////////////////////
+
+    [fetchCreateExamQuestion.pending]: (state) => {
+      state.exam.status = "loading";
+      state.exam.items = [];
+    },
+    [fetchCreateExamQuestion.fulfilled]: (state, action) => {
+      state.exam.status = "loaded";
+      state.exam.items = action.payload;
+    },
+    [fetchCreateExamQuestion.rejected]: (state) => {
+      state.exam.status = "error";
+      state.exam.items = [];
+    },
+
+    [fetchGetExamQuestions.pending]: (state) => {
+      state.exam.status = "loading";
+      state.exam.items = [];
+    },
+    [fetchGetExamQuestions.fulfilled]: (state, action) => {
+      state.exam.status = "loaded";
+      state.exam.items = action.payload;
+    },
+    [fetchGetExamQuestions.rejected]: (state) => {
+      state.exam.status = "error";
+      state.exam.items = [];
+    },
   },
 });
 

@@ -17,6 +17,9 @@ import Questions from "./components/Student/Questions/Questions.jsx";
 import CreateChapter from "./components/Employee/Lessons/CreateChapter.jsx";
 import CreateLesson from "./components/Employee/Lessons/CreateLesson.jsx";
 import Lessons from "./components/Employee/Lessons/Lessons.jsx";
+import Chapters from "./components/Employee/Lessons/Chapters.jsx";
+import Class from "./components/Employee/Lessons/Class.jsx";
+import LessonFull from "./components/Employee/Lessons/LessonFull.jsx";
 function App() {
   
   const dispatch = useDispatch()
@@ -54,12 +57,13 @@ function App() {
 
         <Route path="/student-questions" element={<><Header/><Questions/></> } />
 
-        <Route path="/create-chapter" element={<><Header/><CreateChapter/></> } />
-        <Route path="/create-lesson" element={<><Header/><CreateLesson/></> } />
+        <Route path="/class/:id/create-chapter" element={<><Header/><CreateChapter/></> } />
+        <Route path="/class/:i/chapter/:id/create-lesson" element={<><Header/><CreateLesson/></> } />
 
-        <Route path="/all-lessons" element={<><Header/><Lessons/></> } />
-
-
+        <Route path="/class" element={<><Header/><Class/></> } />
+        <Route path="/class/:id/all-chapters" element={<><Header/><Chapters/></> } />
+        <Route path="/class/:class_id/chapter/:id/all-lessons" element={<><Header/><Lessons/></> } />
+        <Route path="/class/:class_id/chapter/:chapter/lesson/:lesson" element={<><Header/><LessonFull/></> } />
     </Routes>
   </>)
 }

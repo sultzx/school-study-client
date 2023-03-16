@@ -1,8 +1,10 @@
 import React from "react";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+
 import { selectIsAuth, logout, fetchAuthMe } from "../redux/slices/user.js";
+
 
 const Header = () => {
 
@@ -22,8 +24,6 @@ const Header = () => {
       dispatch(logout());
     window.localStorage.removeItem("token");
   };
-
-  console.log(userData && userData.role && userData.role)
 
   return (
     <>

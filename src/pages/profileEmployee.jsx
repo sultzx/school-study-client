@@ -138,7 +138,7 @@ const Profile = () => {
                             <Nav.Item>
                               <Nav.Link
                                 className="btn btn-primary outlined-btn p-link-btn"
-                                href="/create-chapter"
+                                href="/class"
                                 style={{
                                   padding: "6px",
                                   margin: "0",
@@ -174,8 +174,7 @@ const Profile = () => {
                                   margin: "0",
                                   color: "#00509D",
                                   background: "transparent",
-                                }}
-                              >
+                                }}>
                                 Емтихан
                               </Nav.Link>
                             </Nav.Item>
@@ -183,15 +182,14 @@ const Profile = () => {
                             <hr style={{ margin: "0px" }} />
                             <Nav.Item>
                               <Nav.Link
-                               eventKey="contact"
+                                eventKey="contact"
                                 className="btn btn-primary outlined-btn p-link-btn"
                                 style={{
                                   padding: "6px",
                                   margin: "0",
                                   color: "#00509D",
                                   background: "transparent",
-                                }}
-                              >
+                                }}>
                                 Оқушымен байланыс
                               </Nav.Link>
                             </Nav.Item>

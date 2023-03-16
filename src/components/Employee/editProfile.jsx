@@ -48,13 +48,12 @@ const EditProfile = () => {
     const {
       register,
       handleSubmit,
-      watch,
       formState: { errors, isValid },
     } = useForm({
       defaultValues: {
-        lastname: userData && userData.lastname && userData.lastname,
-        firstname: userData && userData.firstname && userData.firstname,
-        patronymic: userData && userData.patronymic && userData.patronymic,
+        lastname: userData && userData.lastname,
+        firstname: userData && userData.firstname,
+        patronymic: userData && userData.patronymic,
 
       },
       mode: "onChange",
@@ -126,7 +125,6 @@ const EditProfile = () => {
                         })}
                         type="text"
                         placeholder={userData && 
-                          userData.lastname && 
                           userData.lastname}
                       />
                     </Form.Group>
@@ -165,7 +163,6 @@ const EditProfile = () => {
                         })}
                         type="text"
                         placeholder={userData && 
-                          userData.firstname && 
                           userData.firstname}
                       />
                     </Form.Group>
@@ -204,7 +201,6 @@ const EditProfile = () => {
                         })}
                         type="text"
                         placeholder={userData && 
-                          userData.patronymic && 
                           userData.patronymic}
                       />
                     </Form.Group>

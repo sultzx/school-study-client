@@ -238,6 +238,7 @@ hr {
     border: 1px solid #DCEBFD;
     color: white
   }
+  transition: 0.5s;
 }
 
 .subject-btn:active {
@@ -278,4 +279,69 @@ hr {
   background-image: url('../images/english.png');
   background-size: cover;
   opacity: 0.7;
+}
+
+.chapter-img {
+  margin: 16px;
+  border-radius: 50%;
+  width: 220px;
+  height: 220px;
+  overflow: hidden;
+  background-color: #004485;
+  display: inline-block;
+  transition-duration: 0.5s;
+}
+
+.chapter-img:hover {
+  border: 1px solid #004485;
+  opacity: 0.5;
+}
+
+.chapter {
+  margin: 24px 0;
+  border: 2px solid #004485;
+  p {
+    margin: 0;
+    padding: 6px 0;
+    background-color: #155fa58e;
+    border: 1px solid #DCEBFD;
+    color: white;
+    transition: 0.5s
+  };
+  transition: 0.3s;
+}
+
+.chapter:hover {
+  border: 2px solid #004485;
+  opacity: 0.5;
+  p {
+    margin: 0;
+    background-color: #004485;
+    border: 1px solid #DCEBFD;
+    color: white
+  }
+}
+
+.class-subject-btn {
+  height: 200px;
+  background-image: url('../images/book.png');
+  background-size: cover;
+  p {
+    margin: 0 -12px 0 0px;
+    padding: 12px;
+    background: #155FA5;
+  }
+}
+
+.nav-choose-link {
+  background: #155FA5;
+}
+
+.variant-choose-input {
+  padding: 0;
+  margin: auto auto auto 4px;
+  border: 1px solid ;
+  border-top: transparent;
+  border-right: transparent;
+  border-left: transparent;
 }

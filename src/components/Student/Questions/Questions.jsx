@@ -1,24 +1,31 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+
 import { fetchAllQuestions } from "../../../redux/slices/study";
+import { selectIsAuth } from "../../../redux/slices/user";
 import Question from "./Question.jsx";
 
 const Questions = () => {
   const dispatch = useDispatch();
-
-const userData = useSelector((state) => state.user.data)
-
-console.log('userData', userData && userData)
+  const isAuth = useSelector(selectIsAuth)
+  const userData = useSelector((state) => state.user.data)
 
   const { questions } = useSelector((state) => state.study);
 
+  
 
   React.useEffect(() => {
     dispatch(fetchAllQuestions());
   }, []);
 
   console.log(questions && questions)
+
+  console.log('is auth', isAuth)
+
+
+
 
   return (
     <>
@@ -34,7 +41,7 @@ console.log('userData', userData && userData)
                   questions.items &&
                   questions.items.map((item, i) => (
                     item && item.student 
-                        && item.student._id == (userData && userData._id) ?
+                        && item.student._id == (userData && userData._id) &&
                     <Question
                     i={i}
                     key={i}
@@ -45,7 +52,6 @@ console.log('userData', userData && userData)
                       createdAt={item && item.createdAt}
                       updatedAt={item && item.updatedAt}
                     />
-                    : <h4>Сізде әзірге сұрақтар жоқ</h4> 
                   ))}
               </Row>
               <Row>

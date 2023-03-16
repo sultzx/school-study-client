@@ -5,9 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateChapter } from "../../../redux/slices/study";
 import axios from "../../../axios.js";
 import { fetchAuthMe } from "../../../redux/slices/user";
+import { useParams } from "react-router-dom";
 
 const CreateChapter = () => {
   const dispatch = useDispatch();
+
+  const { id } = useParams()
 
   const userData = useSelector((state) => state.user.data);
 
@@ -36,9 +39,10 @@ const CreateChapter = () => {
   const createChapter = () => {
     dispatch(fetchCreateChapter({
         name: chapter && chapter,
+        clss: id,
         img: img && img
     }));
-    window.location.assign('http://localhost:3000/create-lesson')
+    window.location.assign(`http://localhost:3000/class/${id}/all-chapters`)
   };
 
   return (
@@ -50,7 +54,12 @@ const CreateChapter = () => {
           <br />
           <Card className="static-card profile-access-denied-card">
             <Card.Body>
+
               <Row>
+                <Col lg={12}>
+                  <h4>{userData && userData.subject.name}</h4>
+                  <hr />
+                </Col>
                 <Col lg={8}>
                   <input
                     type="text"
@@ -107,7 +116,7 @@ const CreateChapter = () => {
                     onClick={() => {
                       window.location.assign('http://localhost:3000/create-lesson')
                     }}
-                    className="btn btn-primary signup shadow"
+                    className="btn btn-primary signup shadow-sm"
                   >
                     Пән бөлімдері
                   </Button>
@@ -116,7 +125,7 @@ const CreateChapter = () => {
                     onClick={() => {
                       createChapter();
                     }}
-                    className="btn btn-primary signup shadow"
+                    className="btn btn-primary signup shadow-sm"
                   >
                     Бөлім құру
                   </Button>

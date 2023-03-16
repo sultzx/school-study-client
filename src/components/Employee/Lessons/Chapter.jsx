@@ -1,27 +1,31 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
+import "../../../styles/index.scss";
 
-const Chapter = ({name, img, id}) => {
+const Chapter = ({ name, clss, img, id }) => {
+  return (
+    <>
+      <Col lg={3} className="d-flex  justify-content-center align-items-center">
+        <Button
+          className="btn btn-primary  subject-btn chapter"
+          style={{
+            backgroundImage: `url(http://localhost:5000${img})`,
+            borderRadius: '50%',
+            backgroundSize: 'cover',
+            padding: '0',
+            height: '250px',
+            width: '250px'
+          }}
+          onClick={() => {
+            window.location.assign(`http://localhost:3000/class/${clss}/chapter/${id}/all-lessons`)
+          }}
+        >
+          <p>{name}</p>
+        </Button>
+      </Col>
+    </>
+  );
+};
 
-    return (<>
-        <Col lg={3}>
-            <Card className="static-card profile-access-denied-card">
-                <Card.Body className="d-flex row justify-content-center">
-                    {name} <br />
-                    <img 
-                    className="img-fluid flex-fill"
-                    src={`http://localhost:5000${img}`} style={{
-                        height: '180px'
-                    }} alt="" />
-                     <br />
-                     <Button onClick={() => {}} className="btn btn-primary signup shadow">
-                        Кіру
-                     </Button>
-                </Card.Body>
-            </Card>
-        </Col>
-    </>)
-}
-
-export default Chapter
+export default Chapter;
