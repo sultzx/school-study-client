@@ -41,7 +41,7 @@ const Profile = () => {
 
   console.log("userData", userData && userData);
 
-  const isStatus = userData && userData.status != "accepted";
+  const isStatus = userData && userData.status == "access";
 
   const handleChangeFile = async (event) => {
     try {
@@ -251,6 +251,7 @@ const Profile = () => {
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
+                            href="/all-subjects"
                             style={{
                               padding: "6px",
                               margin: "0",
@@ -266,6 +267,7 @@ const Profile = () => {
                         <Nav.Item>
                           <Nav.Link
                             className="btn btn-primary outlined-btn p-link-btn"
+                            href="/pass-quiz"
                             style={{
                               padding: "6px",
                               margin: "0",
@@ -280,6 +282,7 @@ const Profile = () => {
                         <hr style={{ margin: "0px" }} />
                         <Nav.Item>
                           <Nav.Link
+                           href="/pass-exam"
                             className="btn btn-primary outlined-btn p-link-btn"
                             style={{
                               padding: "6px",

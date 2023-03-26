@@ -1,7 +1,13 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCreateTestQuestion } from "../../../redux/slices/study";
 
 const CreateTest = ({ class_id, chapter_id, lesson_id }) => {
+
+  console.log(chapter_id)
+
+    const dispatch = useDispatch()
 
     const [testQuestion, setTestQuestion] = React.useState()
     const [examQuestion, setExamQuestion] = React.useState()
@@ -19,7 +25,15 @@ const CreateTest = ({ class_id, chapter_id, lesson_id }) => {
     }, 'correct', correct)
 
     const createTestQuestion = () => {
-
+        dispatch(fetchCreateTestQuestion({
+            question: testQuestion,
+            A, B, C, D,
+            correct,
+            lesson: lesson_id,
+            chapter: chapter_id,
+            class_id: class_id
+        }))
+        alert('Tест сұрағы сәтті құрылды')
     }
 
 
@@ -140,7 +154,9 @@ const CreateTest = ({ class_id, chapter_id, lesson_id }) => {
               <br />
             </Col>
             <Col lg={12} xs={12} className="d-flex column justify-content-end">
-              <Button className="btn btn-primary signup shadow-sm" disabled={
+              <Button className="btn btn-primary signup shadow-sm" 
+              onClick={() => createTestQuestion()}
+              disabled={
                 !(testQuestion && A && B && C && D && correct)
               }>
                 Тест сұрағын құру

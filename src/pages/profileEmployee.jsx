@@ -154,6 +154,7 @@ const Profile = () => {
                             <Nav.Item>
                               <Nav.Link
                                 className="btn btn-primary outlined-btn p-link-btn"
+                                href="/quiz"
                                 style={{
                                   padding: "6px",
                                   margin: "0",
@@ -169,6 +170,7 @@ const Profile = () => {
                             <Nav.Item>
                               <Nav.Link
                                 className="btn btn-primary outlined-btn p-link-btn"
+                                href="/exam"
                                 style={{
                                   padding: "6px",
                                   margin: "0",

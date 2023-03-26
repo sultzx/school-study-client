@@ -186,6 +186,90 @@ export const fetchGetExamQuestions = createAsyncThunk(
   }
 );
 
+/////////////////////////////////////////////////
+
+export const fetchGetSubjects = createAsyncThunk(
+  "auth/fetchGetSubjects",
+  async () => {
+    const { data } = await axios.get("/api/study/all-subjects");
+    return data;
+  }
+);
+
+//////////////////////////////////////////////////
+
+export const fetchQuizAnswer = createAsyncThunk(
+  "auth/fetchQuizAnswer",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "/api/study/quiz-answer",
+        params
+      );
+      return response.data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchAllQuizAnswers = createAsyncThunk(
+  "auth/fetchAllQuizAnswers",
+  async () => {
+    const { data } = await axios.get("/api/study/all-quiz-answers");
+    return data;
+  }
+);
+
+/////////////////////////////////////////////////////
+
+export const fetchExamAnswer = createAsyncThunk(
+"auth/fetchExamAnswer",
+async (params, { rejectWithValue }) => {
+  try {
+    const response = await axios.post(
+      "/api/study/exam-answer",
+      params
+    );
+    return response.data;
+  } catch (error) {
+    if (!error.response) {
+      throw error;
+    }
+    return rejectWithValue(error.response.data);
+  }
+}
+);
+
+export const fetchCheckExamAnswer = createAsyncThunk(
+  "auth/fetchCheckExamAnswer",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        "/api/study/exam-answer-grade",
+        params
+      );
+      return response.data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+  );
+
+export const fetchAllExamAnswers = createAsyncThunk(
+"auth/fetchAllExamAnswers",
+async () => {
+  const { data } = await axios.get("/api/study/all-exam-answers");
+  return data;
+}
+);
+
 const initialState = {
   classrooms: {
     items: [],
@@ -197,12 +281,16 @@ const initialState = {
     status: "loading",
     error: "",
   },
+  subjects: {
+    items: [],
+    status: "loading",
+    error: "",
+  },
   chapters: {
     items: [],
     status: "loading",
     error: "",
   },
-
   lessons: {
     items: [],
     status: "loading",
@@ -214,6 +302,16 @@ const initialState = {
     error: "",
   },
   exam: {
+    items: [],
+    status: "loading",
+    error: "",
+  },
+  quiz_answers: {
+    items: [],
+    status: "loading",
+    error: "",
+  },
+  exam_answers: {
     items: [],
     status: "loading",
     error: "",
@@ -250,6 +348,81 @@ const studySlice = createSlice({
       state.classrooms.status = "error";
       state.classrooms.items = [];
     },
+
+    ///////////////////////////////////////////////
+
+    [fetchQuizAnswer.pending]: (state) => {
+      state.quiz_answers.status = "loading";
+      state.quiz_answers.items = [];
+    },
+    [fetchQuizAnswer.fulfilled]: (state, action) => {
+      state.quiz_answers.status = "loaded";
+      state.quiz_answers.items = action.payload;
+    },
+    [fetchQuizAnswer.rejected]: (state) => {
+      state.quiz_answers.status = "error";
+      state.quiz_answers.items = [];
+    },
+
+
+    [fetchAllQuizAnswers.pending]: (state) => {
+      state.quiz_answers.status = "loading";
+      state.quiz_answers.items = [];
+    },
+    [fetchAllQuizAnswers.fulfilled]: (state, action) => {
+      state.quiz_answers.status = "loaded";
+      state.quiz_answers.items = action.payload;
+    },
+    [fetchAllQuizAnswers.rejected]: (state) => {
+      state.quiz_answers.status = "error";
+      state.quiz_answers.items = [];
+    },
+
+
+
+    [fetchExamAnswer.pending]: (state) => {
+      state.exam_answers.status = "loading";
+      state.exam_answers.items = [];
+    },
+    [fetchExamAnswer.fulfilled]: (state, action) => {
+      state.exam_answers.status = "loaded";
+      state.exam_answers.items = action.payload;
+    },
+    [fetchExamAnswer.rejected]: (state) => {
+      state.exam_answers.status = "error";
+      state.exam_answers.items = [];
+    },
+
+    [fetchCheckExamAnswer.pending]: (state) => {
+      state.exam_answers.status = "loading";
+      state.exam_answers.items = [];
+    },
+    [fetchCheckExamAnswer.fulfilled]: (state, action) => {
+      state.exam_answers.status = "loaded";
+      state.exam_answers.items = action.payload;
+    },
+    [fetchCheckExamAnswer.rejected]: (state) => {
+      state.exam_answers.status = "error";
+      state.exam_answers.items = [];
+    },
+
+
+    [fetchAllExamAnswers.pending]: (state) => {
+      state.exam_answers.status = "loading";
+      state.exam_answers.items = [];
+    },
+    [fetchAllExamAnswers.fulfilled]: (state, action) => {
+      state.exam_answers.status = "loaded";
+      state.exam_answers.items = action.payload;
+    },
+    [fetchAllExamAnswers.rejected]: (state) => {
+      state.exam_answers.status = "error";
+      state.exam_answers.items = [];
+    },
+
+
+
+////////////////////////////////////////////////////////
 
     [fetchRemoveClassroom.pending]: (state, action) => {
       state.classrooms.status = "loading";
@@ -304,6 +477,22 @@ const studySlice = createSlice({
       state.questions.items = [];
     },
     /////////////////////////////////////////////
+
+
+    [fetchGetSubjects.pending]: (state) => {
+      state.subjects.status = "loading";
+      state.subjects.items = [];
+    },
+    [fetchGetSubjects.fulfilled]: (state, action) => {
+      state.subjects.status = "loaded";
+      state.subjects.items = action.payload;
+    },
+    [fetchGetSubjects.rejected]: (state) => {
+      state.subjects.status = "error";
+      state.subjects.items = [];
+    },
+
+    ///////////////////////////////////////////////
     [fetchCreateChapter.pending]: (state) => {
       state.chapters.status = "loading";
       state.chapters.items = [];

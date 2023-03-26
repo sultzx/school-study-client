@@ -1,6 +1,20 @@
+import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { fetchCreateExamQuestion } from "../../../redux/slices/study";
 
-const CreateExam = () => {
+const CreateExam = ({class_id, chapter_id, lesson_id}) => {
+
+  const dispatch = useDispatch()
+
+  const [examQuestion, setExamQuestion] = React.useState()
+
+  const createExam = () => {
+    dispatch(fetchCreateExamQuestion({
+      question: examQuestion,
+      class_id, chapter_id, lesson_id
+    }))
+  }
 
     return (<>
         <br />
@@ -18,9 +32,11 @@ const CreateExam = () => {
               style={{ margin: "12px 0" }}
             >
               <textarea
+              
                 rows="4"
                 className="flex-fill form-control"
                 placeholder="Сұрақ мәтінін жазыңыз"
+                onChange={event => setExamQuestion(event.target.value) }
               ></textarea>
             </Col>
             <Col lg={12} xs={12}>
@@ -28,7 +44,9 @@ const CreateExam = () => {
                     <br />
                 </Col>
                 <Col lg={12} xs={12} className="d-flex column justify-content-end">
-                    <Button className="btn btn-primary signup shadow-sm">Экзамен сұрағын құру</Button>
+                    <Button 
+                    onClick={() => createExam()}
+                    className="btn btn-primary signup shadow-sm">Экзамен сұрағын құру</Button>
                 </Col>
           </Row>
         </Card.Body>

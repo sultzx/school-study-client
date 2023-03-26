@@ -323,6 +323,7 @@ hr {
 }
 
 .class-subject-btn {
+  width: 180px;
   height: 200px;
   background-image: url('../images/book.png');
   background-size: cover;
@@ -344,4 +345,30 @@ hr {
   border-top: transparent;
   border-right: transparent;
   border-left: transparent;
+}
+
+.subject-btn-card {
+  background-size: cover;
+}
+
+.quiz-question-variant-btn {
+  background-color: transparent;
+  border: 1px solid #004485;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  border-radius: 1px;
+  color: #004485
+}
+
+.quiz-question-variant-btn:focus {
+  background-color: #004485;
+  border: 1px solid #004485;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  
+  border-radius: 1px;
+  color: white
 }

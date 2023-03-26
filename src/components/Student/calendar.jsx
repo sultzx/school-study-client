@@ -11,26 +11,90 @@ const calendar = () => {
   const myEvents = [
     {
       title: "Қазақ тілі",
-      start: new Date(2023, 2, 3, 9, 0),
-      end: new Date(2023, 2, 3, 11, 0),
+      start: new Date(2023, 2, 27, 9, 0),
+      end: new Date(2023, 2, 27, 11, 0),
       color: "#3366CC",
     },
     {
       title: "Математика",
-      start: new Date(2023, 2, 3, 11, 30),
-      end: new Date(2023, 2, 3, 13, 30),
+      start: new Date(2023, 2, 27, 11, 30),
+      end: new Date(2023, 2, 27, 13, 30),
       color: "#DC3912",
     },
     {
       title: "Қазақстан тарихы",
-      start: new Date(2023, 2, 3, 14, 20),
-      end: new Date(2023, 2, 3, 16, 30),
+      start: new Date(2023, 2, 27, 14, 20),
+      end: new Date(2023, 2, 27, 16, 30),
       color: "#FF9900",
     },
     {
       title: "Ағылшын тілі",
-      start: new Date(2023, 2, 4, 12, 0),
-      end: new Date(2023, 2, 4, 14, 0),
+      start: new Date(2023, 2, 27, 12, 0),
+      end: new Date(2023, 2, 27, 14, 0),
+      color: "#109618",
+    },
+
+    {
+      title: "Қазақ тілі",
+      start: new Date(2023, 2, 28, 9, 0),
+      end: new Date(2023, 2, 28, 11, 0),
+      color: "#3366CC",
+    },
+    {
+      title: "Математика",
+      start: new Date(2023, 2, 29, 11, 30),
+      end: new Date(2023, 2, 29, 13, 30),
+      color: "#DC3912",
+    },
+    {
+      title: "Қазақстан тарихы",
+      start: new Date(2023, 2, 28, 14, 20),
+      end: new Date(2023, 2, 28, 16, 30),
+      color: "#FF9900",
+    },
+    {
+      title: "Ағылшын тілі",
+      start: new Date(2023, 2, 29, 12, 0),
+      end: new Date(2023, 2, 29, 14, 0),
+      color: "#109618",
+    },
+
+    {
+      title: "Қазақ тілі",
+      start: new Date(2023, 2, 30, 9, 0),
+      end: new Date(2023, 2, 30, 11, 0),
+      color: "#3366CC",
+    },
+
+    {
+      title: "Қазақстан тарихы",
+      start: new Date(2023, 2, 30, 14, 20),
+      end: new Date(2023, 2, 30, 16, 30),
+      color: "#FF9900",
+    },
+    {
+      title: "Ағылшын тілі",
+      start: new Date(2023, 2, 30, 12, 0),
+      end: new Date(2023, 2, 30, 14, 0),
+      color: "#109618",
+    },
+
+    {
+      title: "Қазақ тілі",
+      start: new Date(2023, 2, 31, 9, 0),
+      end: new Date(2023, 2, 31, 11, 0),
+      color: "#3366CC",
+    },
+    {
+      title: "Математика",
+      start: new Date(2023, 2, 31, 11, 30),
+      end: new Date(2023, 2, 31, 13, 30),
+      color: "#DC3912",
+    },
+    {
+      title: "Ағылшын тілі",
+      start: new Date(2023, 2, 31, 12, 0),
+      end: new Date(2023, 2, 31, 14, 0),
       color: "#109618",
     },
   ];

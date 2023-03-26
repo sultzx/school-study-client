@@ -38,7 +38,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/news">Жаңалықтар</Nav.Link>
+              <Nav.Link href="https://bilimland.kz/kk/news-articles">Жаңалықтар</Nav.Link>
 
               <Nav.Link href="/contact">Байланыс</Nav.Link>
             </Nav>

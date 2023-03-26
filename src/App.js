@@ -20,6 +20,16 @@ import Lessons from "./components/Employee/Lessons/Lessons.jsx";
 import Chapters from "./components/Employee/Lessons/Chapters.jsx";
 import Class from "./components/Employee/Lessons/Class.jsx";
 import LessonFull from "./components/Employee/Lessons/LessonFull.jsx";
+import Quiz from "./components/Employee/Quiz/Quiz.jsx";
+import Exam from "./components/Employee/Quiz/Exam.jsx";
+import Subjects from "./components/Student/Lessons/Subjects.jsx";
+import ChaptersStud from "./components/Student/Lessons/Chapters.jsx";
+import LessonsStud from './components/Student/Lessons/Lessons.jsx'
+import LessonFullStud from './components/Student/Lessons/LessonFull.jsx'
+import PassQuiz from './components/Student/Quiz/Quiz.jsx'
+import PassExam from './components/Student/Exam/Exam.jsx'
+import StudentDetail from './components/Employee/StudentDetail/StudentDetail.jsx'
+import Contact from "./pages/Contact.jsx";
 function App() {
   
   const dispatch = useDispatch()
@@ -52,6 +62,12 @@ function App() {
 
         <Route path="/student-requests" element={<><Header/><Requests/></> } />
         
+        <Route path="/all-subjects" element={<><Header/><Subjects/></> } />
+
+        <Route path="/quiz" element={<><Header/><Quiz/></> } />
+        <Route path="/exam" element={<><Header/><Exam/></> } />
+        
+
         <Route path="/classrooms/:id" element={<><Header/><ClassroomFull/></> } />
         <Route path="/classrooms/:id/insert-students" element={<><Header/><InsertStudents/></> } />
 
@@ -64,6 +80,19 @@ function App() {
         <Route path="/class/:id/all-chapters" element={<><Header/><Chapters/></> } />
         <Route path="/class/:class_id/chapter/:id/all-lessons" element={<><Header/><Lessons/></> } />
         <Route path="/class/:class_id/chapter/:chapter/lesson/:lesson" element={<><Header/><LessonFull/></> } />
+   
+        <Route path="/all-subjects/:id/all-chapters" element={<><Header/><ChaptersStud/></> } />
+   
+        <Route path="/all-subjects/:subject_id/all-chapters/:chapter_id/all-lessons" element={<><Header/><LessonsStud/></> } />
+        <Route path="/all-subjects/:subject_id/all-chapters/:chapter_id/all-lessons/:lesson_id" element={<><Header/><LessonFullStud/></> } />
+   
+        <Route path="/pass-quiz" element={<><Header/><PassQuiz/></> } />
+  
+        <Route path="/pass-exam" element={<><Header/><PassExam/></> } />
+
+        <Route path="/student-detail-for-teacher/:student_id" element={<><Header/><StudentDetail/></> } />
+        <Route path="/contact" element={<><Header/><Contact/></> } />
+
     </Routes>
   </>)
 }

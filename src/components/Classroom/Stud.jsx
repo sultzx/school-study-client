@@ -99,7 +99,9 @@ const Stud = ({
             </button>
             <button
               className="btn btn-primary signup shadow"
-              onClick={() => {}}
+              onClick={() => {
+                window.location.assign(`http://localhost:3000/student-detail-for-teacher/${id && id}`)
+              }}
             >
               Толығырақ
             </button>

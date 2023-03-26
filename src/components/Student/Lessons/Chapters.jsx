@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchGetChapters } from "../../../redux/slices/study.js";
+import { fetchGetChapters, fetchGetSubjects } from "../../../redux/slices/study.js";
 import Chapter from "./Chapter.jsx";
 
 const Chapters = () => {
@@ -17,13 +17,15 @@ const Chapters = () => {
 
 console.log(userData && userData)
 
-  const { chapters } = useSelector((state) => state.study);
+  const { chapters, subjects } = useSelector((state) => state.study);
 
   console.log(chapters && chapters)
 
   React.useEffect(() => {
+    dispatch(fetchGetSubjects());
     dispatch(fetchGetChapters());
   }, []);
+
 
   return (
     <>
@@ -36,19 +38,23 @@ console.log(userData && userData)
             <Card.Body>
               <Row>
                 <Col lg={12}>
-                  <h4>{userData && userData.subject.name}&nbsp;•&nbsp;{id} - сынып</h4>
+                  <h4>{
+                    subjects?.items.map((subject, i) => (
+                        subject._id == id && subject.name
+                    ))
+                    }&nbsp;•&nbsp;{userData?.classroom.name} - сынып</h4>
                   <hr />
                 </Col>
                 {chapters &&
                   chapters.items &&
                   chapters.items.map((chap, i) => (
-                    chap.class == id && chap.subject == (userData.subject &&
-                       userData.subject._id) &&
+                    chap.class == userData?.classroom.name && chap.subject == id &&
                     <Chapter
                       key={i}
                       id={chap && chap._id}
                       name={chap && chap.name}
                       clss={chap && chap.class}
+                      subject={id}
                       img={chap && chap.img}
                     />
                   ))}

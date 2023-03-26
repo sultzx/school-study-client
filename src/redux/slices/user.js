@@ -74,11 +74,28 @@ export const fetchUpdateEmployee= createAsyncThunk('auth/fetchUpdateEmployee', a
           return rejectWithValue(error.response.data)
       }    
 })
+//////////////////////////////////////////////////////////
+
+export const fetchAttending= createAsyncThunk('auth/fetchAttending', async (params, {rejectWithValue}) => {
+    try {
+        const  response  = await axios.post('api/user/student/me/attending', params)
+          return response.data  
+      } catch (error) {
+          if (!error.response) {
+              throw error
+          }
+          return rejectWithValue(error.response.data)
+      }    
+})
 
 export const fetchAuthMe= createAsyncThunk('auth/fetchAuthMe', async () => {
     const { data } = await axios.get('/api/user/me')    
     return data
 })
+
+
+
+
 
 const initialState = {
     all_students: {
@@ -185,6 +202,21 @@ const userSlice = createSlice({
             state.status = 'error'
             state.error = action.payload
         },
+
+
+        [fetchAttending.pending]: (state) => {
+            state.status = 'loading'
+            state.error = ''
+        },
+        [fetchAttending.fulfilled]: (state, action) => {
+            state.status = 'loaded'
+            state.data = action.payload
+        },
+        [fetchAttending.rejected]: (state, action) => {
+            state.status = 'error'
+            state.error = action.payload
+        },
+
 
         [fetchUpdateEmployee.pending]: (state) => {
             state.status = 'loading'

@@ -3,16 +3,14 @@ import { Container, Tab, Row, Col, Nav, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchGetChapters, fetchGetLessons } from "../../../redux/slices/study";
-
-import CreateTest from './CreateTest.jsx'
-import CreateExam from './CreateExam.jsx'
+import { fetchAttending } from "../../../redux/slices/user";
 
 const LessonFull = () => {
   const dispatch = useDispatch();
 
-  const { class_id, chapter, lesson } = useParams();
+  const { subject_id, chapter_id, lesson_id } = useParams();
 
-  const {  chapters, lessons } = useSelector((state) => state.study);
+  const { subjects, chapters, lessons } = useSelector((state) => state.study);
 
   const userData = useSelector((state) => state.user.data);
 
@@ -27,7 +25,7 @@ const LessonFull = () => {
   chapters &&
     chapters.items &&
     chapters.items.forEach((chap) => {
-      if (chap._id == chapter) {
+      if (chap._id == chapter_id) {
         sortedChapter.push({
           name: chap && chap.name,
         });
@@ -37,7 +35,7 @@ const LessonFull = () => {
   lessons &&
     lessons.items &&
     lessons.items.forEach((less, i) => {
-      if (less._id == lesson) {
+      if (less._id == lesson_id) {
         sortedLesson.push({
           index: i + 1,
           title: less && less.title,
@@ -47,12 +45,20 @@ const LessonFull = () => {
       }
     });
 
+    const attending = async () => {
+       await  dispatch(fetchAttending({
+            subject_id,
+            lesson_id
+        }))
+        window.location
+        .assign(`http://localhost:3000/all-subjects/${subject_id}/all-chapters/${chapter_id}/all-lessons`)
+    }
+
   return (
     <>
       <Container fluid style={{ background: "white" }}>
         <br />
         <Container>
-          <Tab.Container>
             <h3>
               Сабақ - {sortedLesson && sortedLesson[0] && sortedLesson[0].index}
             </h3>
@@ -63,7 +69,9 @@ const LessonFull = () => {
                   <Col lg={12}>
                     <h4>
                       {" "}
-                      {userData && userData.subject.name}&nbsp;•&nbsp;
+                      {subjects?.items.map((subject, i) => (
+                        subject._id == subject_id && subject.name
+                      ))}&nbsp;•&nbsp;
                       {sortedChapter &&
                         sortedChapter[0] &&
                         sortedChapter[0].name}
@@ -128,26 +136,14 @@ const LessonFull = () => {
 
                         <Nav variant="pills" className=" d-flex column justify-content-end">
                             <Nav.Item>
-                                <Nav.Link eventKey={'test'} 
-                                className="btn btn-primary signup shadow-sm nav-choose-link"
-                                href="#create-test"
-                                style={{
-                                    backgroundColor: 'white',
-                                    color: '#004485'
-                                }}>
-                                    Тест сұрағы
-                                </Nav.Link>
-                            </Nav.Item>
-
-                            <Nav.Item>
-                                <Nav.Link eventKey={'exam'} 
-                                href="#create-exam"
+                                <Nav.Link
+                                onClick={() => attending()}
                                 className="btn btn-primary signup shadow-sm nav-choose-link"
                                 style={{
                                     backgroundColor: 'white',
                                     color: '#004485'
                                 }}>
-                                Экзамен сұрағы
+                                Сабақты түсіндім
                                 </Nav.Link>
                             </Nav.Item>
                         </Nav>
@@ -158,26 +154,6 @@ const LessonFull = () => {
                 </Row>
               </Card.Body>
             </Card>
-
-            <Tab.Content>
-                <Tab.Pane eventKey="test">
-                    <div id="create-test">
-                        <CreateTest class_id={class_id} chapter_id={chapter} lesson_id={lesson} />
-                    </div>
-                      
-                  <br />
-                </Tab.Pane>
-
-                <Tab.Pane eventKey="exam">
-                    <div  id="create-exam">
-                        <CreateExam class_id={class_id} chapter_id={chapter} lesson_id={lesson}/>
-                    </div>
-                  <br />
-                </Tab.Pane>
-
-              </Tab.Content>
-
-          </Tab.Container>
         </Container>
 
         <br />
